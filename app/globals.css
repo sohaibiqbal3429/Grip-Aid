@@ -1,0 +1,13 @@
+/*
+ * App-level globals for the Next.js migration.
+ * Do not rename legacy selectors such as te-main-menu, te-theme-btn,
+ * te-comment-form, page-breadcrumb-area, or section classes during the
+ * initial conversion; the vendor/theme bundle preserves those class names.
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}

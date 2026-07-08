@@ -1,0 +1,13 @@
+/*
+ * Legacy vendor and theme styles for the initial Next.js migration.
+ * Keep these imports in their original order and preserve existing class names
+ * until migrated pages have been visually compared with the PHP templates.
+ */
+@import url("/vendor/css/bootstrap.min.css");
+@import url("/vendor/css/fontawesome.min.css");
+@import url("/vendor/css/animate.css");
+@import url("/vendor/css/magnific-popup.css");
+@import url("/vendor/css/meanmenu.css");
+@import url("/vendor/css/nice-select.css");
+@import url("/vendor/css/slick.css");
+@import url("/vendor/css/style.css");
