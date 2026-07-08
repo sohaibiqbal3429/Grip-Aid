@@ -76,14 +76,20 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="te-comment-form">
+    <form onSubmit={handleSubmit} className="te-comment-form" noValidate>
       <h3>
         We Can Take Your <br /> Business To Growth
       </h3>
       <div className="row gx-4">
         <div className="col-xl-6">
           <div className="te-contacts-name">
-            <input name="name" type="text" placeholder="Your Name" autoComplete="name" />
+            <input
+              name="name"
+              type="text"
+              placeholder="Your Name"
+              autoComplete="name"
+              aria-describedby={fieldErrors.name?.length ? "contact-name-error" : undefined}
+            />
             {renderFieldErrors("name")}
           </div>
         </div>
@@ -95,20 +101,30 @@ export default function ContactForm() {
               placeholder="Your Email*"
               autoComplete="email"
               aria-describedby={fieldErrors.email?.length ? "contact-email-error" : undefined}
-              required
             />
             {renderFieldErrors("email")}
           </div>
         </div>
         <div className="col-xl-6">
           <div className="te-contacts-name">
-            <input name="phone" type="tel" placeholder="Your Phone" autoComplete="tel" />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Your Phone"
+              autoComplete="tel"
+              aria-describedby={fieldErrors.phone?.length ? "contact-phone-error" : undefined}
+            />
             {renderFieldErrors("phone")}
           </div>
         </div>
         <div className="col-xl-6">
           <div className="te-contacts-name">
-            <input name="subject" type="text" placeholder="Subject" />
+            <input
+              name="subject"
+              type="text"
+              placeholder="Subject"
+              aria-describedby={fieldErrors.subject?.length ? "contact-subject-error" : undefined}
+            />
             {renderFieldErrors("subject")}
           </div>
         </div>
@@ -120,7 +136,6 @@ export default function ContactForm() {
               rows={3}
               placeholder="Write your Message here"
               aria-describedby={fieldErrors.message?.length ? "contact-message-error" : undefined}
-              required
             />
             {renderFieldErrors("message")}
           </div>
