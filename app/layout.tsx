@@ -4,7 +4,6 @@ import Script from "next/script";
 
 import { NewsletterFormEnhancer } from "@/components/forms/NewsletterFormEnhancer";
 import { siteDescription, siteKeywords, siteName, siteUrl } from "@/lib/metadata";
-import "@/styles/vendor.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -52,6 +51,16 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="/vendor/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/vendor/css/fontawesome.min.css" />
+        <link rel="stylesheet" href="/vendor/css/animate.css" />
+        <link rel="stylesheet" href="/vendor/css/magnific-popup.css" />
+        <link rel="stylesheet" href="/vendor/css/meanmenu.css" />
+        <link rel="stylesheet" href="/vendor/css/nice-select.css" />
+        <link rel="stylesheet" href="/vendor/css/slick.css" />
+        <link rel="stylesheet" href="/vendor/css/style.css" />
+      </head>
       <body>
         {children}
         <NewsletterFormEnhancer />
