@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 
 import { sendContactMail } from "@/lib/mail";
-import { CONTACT_FIELD_LIMITS, validateContactPayload, type ContactField } from "@/lib/validations";
+import {
+  CONTACT_FIELD_LIMITS,
+  validateContactPayload,
+  type ContactValidationInput,
+} from "@/lib/validations";
 
-type RawContactPayload = Partial<Record<ContactField, unknown>>;
+type RawContactPayload = ContactValidationInput;
 
 async function parseContactPayload(request: Request): Promise<RawContactPayload> {
   const contentType = request.headers.get("content-type") || "";
@@ -13,13 +17,21 @@ async function parseContactPayload(request: Request): Promise<RawContactPayload>
     const body = await request.json();
 
     if (body && typeof body === "object" && !Array.isArray(body)) {
-      Object.assign(payload, body);
+      const bodyFields = body as Record<string, unknown>;
+
+      for (const field of Object.keys(CONTACT_FIELD_LIMITS) as Array<
+        keyof typeof CONTACT_FIELD_LIMITS
+      >) {
+        payload[field] = bodyFields[field] ?? "";
+      }
     }
   } else {
     const formData = await request.formData();
 
-    for (const field of Object.keys(CONTACT_FIELD_LIMITS) as ContactField[]) {
-      payload[field] = formData.get(field);
+    for (const field of Object.keys(CONTACT_FIELD_LIMITS) as Array<
+      keyof typeof CONTACT_FIELD_LIMITS
+    >) {
+      payload[field] = formData.get(field) ?? "";
     }
   }
 

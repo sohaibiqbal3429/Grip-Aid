@@ -9,6 +9,7 @@ export const CONTACT_FIELD_LIMITS = {
 export type ContactField = keyof typeof CONTACT_FIELD_LIMITS;
 export type ContactFieldErrors = Partial<Record<ContactField, string[]>>;
 export type ContactValidationInput = Partial<Record<ContactField, unknown>>;
+export type ContactApiRequestBody = Partial<Record<ContactField, string>>;
 export type ValidatedContactPayload = Partial<Record<ContactField, string>> & {
   email: string;
   message: string;

@@ -2,7 +2,11 @@
 
 import { FormEvent, useState } from "react";
 
-import type { ContactFieldErrors } from "@/lib/validations";
+import type {
+  ContactApiRequestBody,
+  ContactField,
+  ContactFieldErrors,
+} from "@/lib/validations";
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
@@ -12,8 +16,32 @@ type ContactApiResponse = {
   fieldErrors?: ContactFieldErrors;
 };
 
+const FIELD_LABELS: Record<ContactField, string> = {
+  name: "Name",
+  email: "Email",
+  phone: "Phone",
+  subject: "Subject",
+  message: "Message",
+};
+
 function formatFieldErrors(fieldErrors: ContactFieldErrors = {}) {
-  return Object.values(fieldErrors).flat().join(" ");
+  return (Object.entries(fieldErrors) as Array<[ContactField, string[]]>)
+    .flatMap(([field, messages]) =>
+      messages.map((message) => `${FIELD_LABELS[field]}: ${message}`),
+    )
+    .join(" ");
+}
+
+function getContactRequestBody(form: HTMLFormElement): ContactApiRequestBody {
+  const formData = new FormData(form);
+
+  return {
+    name: String(formData.get("name") || ""),
+    email: String(formData.get("email") || ""),
+    phone: String(formData.get("phone") || ""),
+    subject: String(formData.get("subject") || ""),
+    message: String(formData.get("message") || ""),
+  };
 }
 
 export default function ContactFormAlt() {
@@ -28,10 +56,11 @@ export default function ContactFormAlt() {
     setFieldErrors({});
 
     const form = event.currentTarget;
+    const requestBody = getContactRequestBody(form);
     const response = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      body: JSON.stringify(requestBody),
     });
     const result = (await response.json().catch(() => null)) as ContactApiResponse | null;
 
@@ -51,9 +80,33 @@ export default function ContactFormAlt() {
     setStatusMessage("Your message has been sent. We will contact you shortly.");
   }
 
+  function renderFieldErrors(field: ContactField) {
+    const messages = fieldErrors[field];
+
+    if (!messages?.length) {
+      return null;
+    }
+
+    return (
+      <p className="text-danger" id={`contact-alt-${field}-error`}>
+        {messages.join(" ")}
+      </p>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="te-comment-form">
+    <form onSubmit={handleSubmit} className="te-comment-form" noValidate>
       <div className="row gx-4">
+        <div className="col-xl-6">
+          <input
+            name="name"
+            type="text"
+            placeholder="Your Name"
+            autoComplete="name"
+            aria-describedby={fieldErrors.name?.length ? "contact-alt-name-error" : undefined}
+          />
+          {renderFieldErrors("name")}
+        </div>
         <div className="col-xl-6">
           <input
             name="email"
@@ -61,16 +114,27 @@ export default function ContactFormAlt() {
             placeholder="Your Email*"
             autoComplete="email"
             aria-describedby={fieldErrors.email?.length ? "contact-alt-email-error" : undefined}
-            required
           />
-          {fieldErrors.email?.length ? (
-            <p className="text-danger" id="contact-alt-email-error">
-              {fieldErrors.email.join(" ")}
-            </p>
-          ) : null}
+          {renderFieldErrors("email")}
         </div>
         <div className="col-xl-6">
-          <input name="phone" type="tel" placeholder="Your Phone" autoComplete="tel" />
+          <input
+            name="phone"
+            type="tel"
+            placeholder="Your Phone"
+            autoComplete="tel"
+            aria-describedby={fieldErrors.phone?.length ? "contact-alt-phone-error" : undefined}
+          />
+          {renderFieldErrors("phone")}
+        </div>
+        <div className="col-xl-6">
+          <input
+            name="subject"
+            type="text"
+            placeholder="Subject"
+            aria-describedby={fieldErrors.subject?.length ? "contact-alt-subject-error" : undefined}
+          />
+          {renderFieldErrors("subject")}
         </div>
         <div className="col-xl-12">
           <textarea
@@ -79,13 +143,8 @@ export default function ContactFormAlt() {
             rows={3}
             placeholder="Write your Message here"
             aria-describedby={fieldErrors.message?.length ? "contact-alt-message-error" : undefined}
-            required
           />
-          {fieldErrors.message?.length ? (
-            <p className="text-danger" id="contact-alt-message-error">
-              {fieldErrors.message.join(" ")}
-            </p>
-          ) : null}
+          {renderFieldErrors("message")}
         </div>
         {statusMessage ? (
           <div className="col-12" role="status" aria-live="polite">
