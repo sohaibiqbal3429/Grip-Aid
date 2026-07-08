@@ -39,6 +39,7 @@ export const publicRoutes: PublicRoute[] = [
   { path: "/team", title: "Team Member - Car Service & Repair HTML5 Template" },
   { path: "/team/details", title: "Team Details - Car Service & Repair HTML5 Template" },
   { path: "/contact", title: "Contact Us - Car Service & Repair HTML5 Template" },
+  { path: "/search", title: "Search - Car Service & Repair HTML5 Template" },
 ];
 
 export function absoluteUrl(path = "/"): string {
