@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
 
+import { NewsletterFormEnhancer } from "@/components/forms/NewsletterFormEnhancer";
 import { siteDescription, siteKeywords, siteName, siteUrl } from "@/lib/metadata";
 import "@/styles/vendor.css";
 import "./globals.css";
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body>
         {children}
+        <NewsletterFormEnhancer />
         <Script src="/vendor/js/jquery.min.js" strategy="beforeInteractive" />
         <Script src="/vendor/js/bootstrap.min.js" strategy="afterInteractive" />
         <Script src="/vendor/js/jquery.nice-select.min.js" strategy="afterInteractive" />
