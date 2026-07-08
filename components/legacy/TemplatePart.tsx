@@ -5,7 +5,7 @@ type TemplatePartProps = {
 };
 
 /**
- * Renders HTML produced from the original PHP template-parts includes.
+ * Renders HTML produced from the migrated legacy template markup.
  * The generated markup intentionally keeps the legacy class names and
  * section structure so the original theme CSS and JavaScript continue to
  * style the migrated App Router pages.
