@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Script from "next/script";
 
 import { siteDescription, siteKeywords, siteName, siteUrl } from "@/lib/metadata";
 import "@/styles/vendor.css";
@@ -50,7 +51,24 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script src="/vendor/js/jquery.min.js" strategy="beforeInteractive" />
+        <Script src="/vendor/js/bootstrap.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/jquery.nice-select.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/slick.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/jquery.counterup.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/waypoints.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/jquery.meanmenu.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/jquery.magnific-popup.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/inview.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/wow.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/tilt.jquery.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/isotope.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/jquery.imagesloaded.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/scrolltotop.min.js" strategy="afterInteractive" />
+        <Script src="/vendor/js/custom.js" strategy="afterInteractive" />
+      </body>
     </html>
   );
 }
