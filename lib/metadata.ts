@@ -24,7 +24,30 @@ export type PublicRoute = {
   title: string;
 };
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+function normalizeSiteUrl(value?: string): string | null {
+  const trimmedValue = value?.trim();
+
+  if (!trimmedValue) {
+    return null;
+  }
+
+  if (/^https?:\/\//i.test(trimmedValue)) {
+    return trimmedValue;
+  }
+
+  return `https://${trimmedValue}`;
+}
+
+function resolveSiteUrl(): string {
+  return (
+    normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL) ??
+    normalizeSiteUrl(process.env.VERCEL_PROJECT_PRODUCTION_URL) ??
+    normalizeSiteUrl(process.env.VERCEL_URL) ??
+    "http://localhost:3000"
+  );
+}
+
+export const siteUrl = resolveSiteUrl();
 
 export const publicRoutes: PublicRoute[] = [
   { path: "/", title: "Home - Car Service & Repair HTML5 Template" },

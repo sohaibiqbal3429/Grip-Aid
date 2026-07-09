@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { sendContactMail } from "@/lib/mail";
+import { getMissingContactMailEnvVars, sendContactMail } from "@/lib/mail";
 import {
   CONTACT_FIELD_LIMITS,
   validateContactPayload,
@@ -64,6 +64,23 @@ export async function POST(request: Request) {
         fieldErrors: validation.fieldErrors,
       },
       { status: 400 },
+    );
+  }
+
+  const missingContactEnvVars = getMissingContactMailEnvVars();
+
+  if (missingContactEnvVars.length > 0) {
+    console.error("Contact form is not configured for this deployment.", {
+      missingContactEnvVars,
+    });
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: "The contact form is not configured on this deployment yet.",
+        fieldErrors: {},
+      },
+      { status: 503 },
     );
   }
 

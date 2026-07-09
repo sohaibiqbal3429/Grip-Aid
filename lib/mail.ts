@@ -17,6 +17,10 @@ const requiredEnvVars = [
   "CONTACT_TO_EMAIL",
 ] as const;
 
+export function getMissingContactMailEnvVars(): string[] {
+  return requiredEnvVars.filter((name) => !process.env[name]?.trim());
+}
+
 function getRequiredEnv(name: (typeof requiredEnvVars)[number]): string {
   const value = process.env[name];
 

@@ -8,6 +8,16 @@ import {
 
 type RawNewsletterPayload = NewsletterValidationInput;
 
+const requiredNewsletterEnvVars = [
+  "NEWSLETTER_API_URL",
+  "NEWSLETTER_API_KEY",
+  "NEWSLETTER_LIST_ID",
+] as const;
+
+function getMissingNewsletterEnvVars(): string[] {
+  return requiredNewsletterEnvVars.filter((name) => !process.env[name]?.trim());
+}
+
 async function parseNewsletterPayload(request: Request): Promise<RawNewsletterPayload> {
   const contentType = request.headers.get("content-type") || "";
   const payload: Record<string, unknown> = {};
@@ -90,6 +100,23 @@ export async function POST(request: Request) {
         fieldErrors: validation.fieldErrors,
       },
       { status: 400 },
+    );
+  }
+
+  const missingNewsletterEnvVars = getMissingNewsletterEnvVars();
+
+  if (missingNewsletterEnvVars.length > 0) {
+    console.error("Newsletter form is not configured for this deployment.", {
+      missingNewsletterEnvVars,
+    });
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: "The newsletter form is not configured on this deployment yet.",
+        fieldErrors: {},
+      },
+      { status: 503 },
     );
   }
 
