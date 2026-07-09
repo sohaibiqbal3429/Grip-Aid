@@ -16,7 +16,7 @@ const FIELD_LABELS: Record<ContactField, string> = {
   name: "Name",
   email: "Email",
   phone: "Phone",
-  subject: "Subject",
+  subject: "Service Needed / Location",
   message: "Message",
 };
 
@@ -58,7 +58,7 @@ export default function ContactForm() {
 
     form.reset();
     setSubmitState("success");
-    setStatusMessage("Your message has been sent. We will contact you shortly.");
+    setStatusMessage("Your roadside assistance request has been sent. Dispatch will contact you shortly.");
   }
 
   function renderFieldErrors(field: ContactField) {
@@ -78,7 +78,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="te-comment-form" noValidate>
       <h3>
-        We Can Take Your <br /> Business To Growth
+        Need Immediate <br /> Roadside Assistance?
       </h3>
       <div className="row gx-4">
         <div className="col-xl-6">
@@ -122,7 +122,7 @@ export default function ContactForm() {
             <input
               name="subject"
               type="text"
-              placeholder="Subject"
+              placeholder="Service Needed / Location"
               aria-describedby={fieldErrors.subject?.length ? "contact-subject-error" : undefined}
             />
             {renderFieldErrors("subject")}
@@ -134,7 +134,7 @@ export default function ContactForm() {
               name="message"
               cols={20}
               rows={3}
-              placeholder="Write your Message here"
+              placeholder="Describe your emergency and exact location"
               aria-describedby={fieldErrors.message?.length ? "contact-message-error" : undefined}
             />
             {renderFieldErrors("message")}
@@ -147,7 +147,7 @@ export default function ContactForm() {
         ) : null}
         <div className="col-12">
           <button className="te-theme-btn style-2" type="submit" disabled={submitState === "submitting"}>
-            {submitState === "submitting" ? "SENDING..." : "SEND NOW"}
+            {submitState === "submitting" ? "SENDING..." : "REQUEST HELP"}
           </button>
         </div>
       </div>
