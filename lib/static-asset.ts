@@ -17,19 +17,6 @@ const CONTENT_TYPES = new Map<string, string>([
   [".woff2", "font/woff2"],
 ]);
 
-const REAL_IMAGE_SOURCES = [
-  "Auto_Repair_shop.jpg",
-  "Car_repair_shop.jpg",
-  "Car_Repair_1.jpg",
-  "Auto_Mechanic.jpg",
-  "Car_repair.jpg",
-  "Mechanic_repairing_car_engine.jpg",
-  "Car_mechanic_worker_repairing_suspension_of_lifted_automobile_at_auto_repair_garage_shop.jpg",
-  "Car_lift_in_an_auto_repair_shop_with_vehicles_and_tools_present.jpg",
-  "South_Park,_Seattle_-_Warner's_Auto_Repair.jpg",
-  "Cars_in_a_local_mechanic_workshop_in_Nigeria.jpg",
-];
-
 const REMOTE_IMAGE_DIRECTORIES = new Set([
   "about",
   "blog",
@@ -45,19 +32,90 @@ const REMOTE_IMAGE_DIRECTORIES = new Set([
   "testimonial",
 ]);
 
+const IMAGE_COLLECTIONS = {
+  roadside: [
+    "https://images.unsplash.com/photo-1742069029240-0590b008553a?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1742069029207-0aacf8fa4401?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1742069028920-c2acf52aaa9e?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1780290805819-636810fd145b?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1780375107678-1552b7682958?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1529369623266-f5264b696110?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1657524241529-dc4835de4049?auto=format&fit=crop&w=1600&q=80",
+  ],
+  repair: [
+    "https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1761659111095-a11e1d2ba294?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1534380640980-4de07f642bdc?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1742069029207-0aacf8fa4401?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1529369623266-f5264b696110?auto=format&fit=crop&w=1600&q=80",
+  ],
+  people: [
+    "https://images.unsplash.com/photo-1780290805819-636810fd145b?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1780375107678-1552b7682958?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1534380640980-4de07f642bdc?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=1200&q=80",
+  ],
+  detail: [
+    "https://images.unsplash.com/photo-1761659111095-a11e1d2ba294?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1742069028920-c2acf52aaa9e?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1657524241529-dc4835de4049?auto=format&fit=crop&w=900&q=80",
+  ],
+  background: [
+    "https://images.unsplash.com/photo-1742069029240-0590b008553a?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1742069029207-0aacf8fa4401?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1742069028920-c2acf52aaa9e?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1529369623266-f5264b696110?auto=format&fit=crop&w=1920&q=80",
+    "https://images.unsplash.com/photo-1657524241529-dc4835de4049?auto=format&fit=crop&w=1920&q=80",
+  ],
+} as const;
+
+const DIRECTORY_IMAGE_POOLS: Record<string, readonly string[]> = {
+  about: [...IMAGE_COLLECTIONS.repair, ...IMAGE_COLLECTIONS.roadside],
+  blog: [...IMAGE_COLLECTIONS.roadside, ...IMAGE_COLLECTIONS.people],
+  "blog-detail": [...IMAGE_COLLECTIONS.roadside, ...IMAGE_COLLECTIONS.repair],
+  commenter: IMAGE_COLLECTIONS.people,
+  instagram: IMAGE_COLLECTIONS.roadside,
+  "latest-post": [...IMAGE_COLLECTIONS.roadside, ...IMAGE_COLLECTIONS.repair],
+  project: IMAGE_COLLECTIONS.roadside,
+  "section-bg": IMAGE_COLLECTIONS.background,
+  service: IMAGE_COLLECTIONS.repair,
+  slider: [...IMAGE_COLLECTIONS.background, ...IMAGE_COLLECTIONS.roadside],
+  "team-member": [...IMAGE_COLLECTIONS.people, ...IMAGE_COLLECTIONS.repair],
+  testimonial: [...IMAGE_COLLECTIONS.people, ...IMAGE_COLLECTIONS.roadside],
+};
+
+const PATH_IMAGE_OVERRIDES: Array<{ pattern: RegExp; images: readonly string[] }> = [
+  { pattern: /^slider\/feature-icon-\d+\.png$/, images: IMAGE_COLLECTIONS.detail },
+  { pattern: /^slider\/slider-feature-one\.png$/, images: IMAGE_COLLECTIONS.roadside },
+  { pattern: /^slider\/slider-two-feature-image-(one|two)\.jpg$/, images: IMAGE_COLLECTIONS.roadside },
+  { pattern: /^slider\/slider-two-shape\.png$/, images: IMAGE_COLLECTIONS.detail },
+  { pattern: /^section-bg\/.+\.(png|jpg)$/, images: IMAGE_COLLECTIONS.background },
+  { pattern: /^blog\/avatar\.jpg$/, images: IMAGE_COLLECTIONS.people },
+  { pattern: /^commenter\/.+\.jpg$/, images: IMAGE_COLLECTIONS.people },
+  { pattern: /^team-member\/.+\.jpg$/, images: IMAGE_COLLECTIONS.people },
+  { pattern: /^testimonial\/.+\.jpg$/, images: IMAGE_COLLECTIONS.people },
+];
+
 function getStableImageIndex(segments: string[]) {
-  return segments.join("/").split("").reduce((total, character) => total + character.charCodeAt(0), 0) % REAL_IMAGE_SOURCES.length;
+  return segments.join("/").split("").reduce((total, character) => total + character.charCodeAt(0), 0);
 }
 
-function getRemoteImageUrl(segments: string[]) {
+function getRemoteImageCandidates(segments: string[]) {
   const [directory] = segments;
+  const imagePath = segments.join("/");
 
   if (!directory || !REMOTE_IMAGE_DIRECTORIES.has(directory)) {
     return null;
   }
 
-  const source = REAL_IMAGE_SOURCES[getStableImageIndex(segments)];
-  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(source)}`;
+  for (const override of PATH_IMAGE_OVERRIDES) {
+    if (override.pattern.test(imagePath)) {
+      return override.images;
+    }
+  }
+
+  return DIRECTORY_IMAGE_POOLS[directory] ?? IMAGE_COLLECTIONS.roadside;
 }
 
 function isPathInsideBaseDir(candidatePath: string, baseDir: string) {
@@ -70,10 +128,42 @@ export async function serveStaticAsset(
   baseDir: string,
   segments: string[],
 ): Promise<Response> {
-  const remoteImageUrl = getRemoteImageUrl(segments);
+  const remoteImageCandidates = getRemoteImageCandidates(segments);
 
-  if (remoteImageUrl) {
-    return Response.redirect(remoteImageUrl, 302);
+  if (remoteImageCandidates) {
+    const startIndex = getStableImageIndex(segments) % remoteImageCandidates.length;
+
+    for (let index = 0; index < remoteImageCandidates.length; index += 1) {
+      const imageUrl = remoteImageCandidates[(startIndex + index) % remoteImageCandidates.length];
+
+      try {
+        const remoteResponse = await fetch(imageUrl, {
+          headers: {
+            Accept: "image/*",
+            "User-Agent": "Grip-Aid/1.0",
+          },
+          next: { revalidate: 60 * 60 * 24 },
+        });
+
+        if (!remoteResponse.ok) {
+          continue;
+        }
+
+        const contentType = remoteResponse.headers.get("content-type") ?? "image/jpeg";
+        const cacheControl =
+          remoteResponse.headers.get("cache-control") ?? "public, max-age=86400, stale-while-revalidate=604800";
+
+        return new Response(remoteResponse.body, {
+          status: 200,
+          headers: {
+            "Cache-Control": cacheControl,
+            "Content-Type": contentType,
+          },
+        });
+      } catch {
+        continue;
+      }
+    }
   }
 
   const assetPath = path.resolve(baseDir, ...segments);
