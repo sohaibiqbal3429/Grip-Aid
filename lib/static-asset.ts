@@ -17,6 +17,8 @@ const CONTENT_TYPES = new Map<string, string>([
   [".woff2", "font/woff2"],
 ]);
 
+const RASTER_IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
+
 const REMOTE_IMAGE_DIRECTORIES = new Set([
   "about",
   "blog",
@@ -124,6 +126,99 @@ function isPathInsideBaseDir(candidatePath: string, baseDir: string) {
   return relativePath !== ".." && !relativePath.startsWith(`..${path.sep}`) && !path.isAbsolute(relativePath);
 }
 
+function getFallbackImageLabel(segments: string[]) {
+  const imagePath = segments.join("/").toLowerCase();
+
+  if (imagePath.includes("team-member") || imagePath.includes("testimonial") || imagePath.includes("commenter")) {
+    return "Professional auto repair team";
+  }
+
+  if (imagePath.includes("blog") || imagePath.includes("latest-post")) {
+    return "Car care and repair news";
+  }
+
+  if (imagePath.includes("project")) {
+    return "Completed auto repair project";
+  }
+
+  if (imagePath.includes("service")) {
+    return "Vehicle repair service";
+  }
+
+  if (imagePath.includes("about")) {
+    return "Auto workshop and mechanics";
+  }
+
+  if (imagePath.includes("appointment")) {
+    return "Garage appointment service";
+  }
+
+  if (imagePath.includes("slider")) {
+    return "Master auto repair service";
+  }
+
+  return "Professional automotive service";
+}
+
+function getFallbackSvg(segments: string[]) {
+  const label = getFallbackImageLabel(segments);
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="${label}">
+  <defs>
+    <linearGradient id="garageSky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#121820"/>
+      <stop offset=".55" stop-color="#28323b"/>
+      <stop offset="1" stop-color="#111318"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3c4147"/>
+      <stop offset="1" stop-color="#1f2227"/>
+    </linearGradient>
+    <linearGradient id="carPaint" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a91221"/>
+      <stop offset=".45" stop-color="#e72838"/>
+      <stop offset="1" stop-color="#8f101b"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="800" fill="url(#garageSky)"/>
+  <path d="M0 490h1200v310H0z" fill="url(#floor)"/>
+  <path d="M0 800l395-310M190 800l315-310M390 800l220-310M815 490l220 310M700 490l120 310M1000 490l200 170" stroke="#5f6870" stroke-width="3" opacity=".42"/>
+  <rect x="118" y="130" width="36" height="520" fill="#d7192a"/>
+  <rect x="1044" y="130" width="36" height="520" fill="#d7192a"/>
+  <rect x="154" y="228" width="890" height="18" rx="9" fill="#d7192a"/>
+  <ellipse cx="350" cy="94" rx="72" ry="25" fill="#ffc857" opacity=".9"/>
+  <ellipse cx="600" cy="94" rx="72" ry="25" fill="#ffc857" opacity=".9"/>
+  <ellipse cx="850" cy="94" rx="72" ry="25" fill="#ffc857" opacity=".9"/>
+  <g filter="url(#softShadow)">
+    <path d="M220 500c26-89 103-139 214-139h226c108 0 181 45 222 139l68 17c40 10 70 46 70 88v31H180v-40c0-39 26-73 63-83l-23-13z" fill="url(#carPaint)"/>
+    <path d="M403 383h269c74 0 134 42 167 105H300c21-63 57-105 103-105z" fill="#dfe8ef" opacity=".96"/>
+    <path d="M423 405h116v83H333c18-44 47-73 90-83zM573 405h95c52 0 96 31 123 83H573z" fill="#263744"/>
+    <rect x="305" y="530" width="574" height="41" rx="20" fill="#f4f6f8" opacity=".22"/>
+    <circle cx="352" cy="634" r="74" fill="#101216"/>
+    <circle cx="352" cy="634" r="34" fill="#c9d0d6"/>
+    <circle cx="847" cy="634" r="74" fill="#101216"/>
+    <circle cx="847" cy="634" r="34" fill="#c9d0d6"/>
+  </g>
+  <g transform="translate(254 286)">
+    <circle cx="0" cy="0" r="33" fill="#d6a06e"/>
+    <path d="M-36 44c0-31 17-52 44-52 30 0 50 21 50 52v115H-36z" fill="#1d67a8"/>
+    <path d="M46 46l149 82" stroke="#d6a06e" stroke-width="22" stroke-linecap="round"/>
+    <path d="M-12 159l-44 118M27 159l55 118" stroke="#1b1e22" stroke-width="24" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(808 276)">
+    <circle cx="0" cy="0" r="28" fill="#d6a06e"/>
+    <path d="M-30 42c0-28 17-47 41-47 25 0 42 19 42 47v104h-83z" fill="#2c3440"/>
+    <path d="M-25 54l-112 83" stroke="#d6a06e" stroke-width="18" stroke-linecap="round"/>
+  </g>
+  <rect x="70" y="48" width="1060" height="74" rx="18" fill="#050608" opacity=".72"/>
+  <text x="600" y="96" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700" fill="#ffffff" letter-spacing="1.5">${label.toUpperCase()}</text>
+</svg>`;
+}
+
 export async function serveStaticAsset(
   baseDir: string,
   segments: string[],
@@ -185,6 +280,18 @@ export async function serveStaticAsset(
       },
     });
   } catch {
+    const extension = path.extname(assetPath).toLowerCase();
+
+    if (RASTER_IMAGE_EXTENSIONS.has(extension)) {
+      return new Response(getFallbackSvg(segments), {
+        status: 200,
+        headers: {
+          "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
+          "Content-Type": "image/svg+xml",
+        },
+      });
+    }
+
     return new Response("Not found", { status: 404 });
   }
 }
