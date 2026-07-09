@@ -511,11 +511,17 @@
         /*
         Preeloader
         ============================*/
-        $(window).on("load", function () {
+        const hidePreloader = function () {
             $("#preloader").fadeOut();
             $("#preloader-status").delay(200).fadeOut("slow");
             $("body").delay(200).css({"overflow-x": "hidden"});
-        });
+        };
+
+        if (document.readyState === "complete") {
+            hidePreloader();
+        } else {
+            $(window).on("load", hidePreloader);
+        }
 
     });
 })(jQuery);
