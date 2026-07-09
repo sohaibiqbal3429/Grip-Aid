@@ -1,6 +1,6 @@
 # Local environment files must never be committed.
-.env*.local
-!.env.local.example
+
+
 node_modules/
 .next/
 .next-dev/
