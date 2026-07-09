@@ -5,7 +5,7 @@ import { searchStaticContent } from "@/lib/search-index";
 
 export const metadata = createPageMetadata({
   path: "/search",
-  title: "Search - Roadside Assistance Services",
+  title: "Search - Car Service & Repair HTML5 Template",
 });
 
 type SearchPageProps = {

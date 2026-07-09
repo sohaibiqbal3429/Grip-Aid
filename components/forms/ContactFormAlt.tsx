@@ -20,7 +20,7 @@ const FIELD_LABELS: Record<ContactField, string> = {
   name: "Name",
   email: "Email",
   phone: "Phone",
-  subject: "Service Needed / Location",
+  subject: "Subject",
   message: "Message",
 };
 
@@ -77,7 +77,7 @@ export default function ContactFormAlt() {
 
     form.reset();
     setSubmitState("success");
-    setStatusMessage("Your roadside assistance request has been sent. Dispatch will contact you shortly.");
+    setStatusMessage("Your message has been sent. We will contact you shortly.");
   }
 
   function renderFieldErrors(field: ContactField) {
@@ -131,7 +131,7 @@ export default function ContactFormAlt() {
           <input
             name="subject"
             type="text"
-            placeholder="Service Needed / Location"
+            placeholder="Subject"
             aria-describedby={fieldErrors.subject?.length ? "contact-alt-subject-error" : undefined}
           />
           {renderFieldErrors("subject")}
@@ -141,7 +141,7 @@ export default function ContactFormAlt() {
             name="message"
             cols={20}
             rows={3}
-            placeholder="Describe your emergency and exact location"
+            placeholder="Write your Message here"
             aria-describedby={fieldErrors.message?.length ? "contact-alt-message-error" : undefined}
           />
           {renderFieldErrors("message")}
@@ -153,7 +153,7 @@ export default function ContactFormAlt() {
         ) : null}
         <div className="col-12">
           <button className="te-theme-btn style-2" type="submit" disabled={submitState === "submitting"}>
-            {submitState === "submitting" ? "SENDING..." : "REQUEST HELP"}
+            {submitState === "submitting" ? "SENDING..." : "SEND NOW"}
           </button>
         </div>
       </div>

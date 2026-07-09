@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: siteName,
   title: {
-    default: "Home - Roadside Assistance Services",
+    default: "Home - Car Service & Repair HTML5 Template",
     template: "%s",
   },
   description: siteDescription,
   keywords: siteKeywords,
-  authors: [{ name: "RoadRescue Pro" }],
+  authors: [{ name: "ThemeEarth" }],
   icons: {
     icon: [{ url: "/images/logo/favicon.png", type: "image/png" }],
     apple: [
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName,
-    title: "Home - Roadside Assistance Services",
+    title: "Home - Car Service & Repair HTML5 Template",
     description: siteDescription,
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Home - Roadside Assistance Services",
+    title: "Home - Car Service & Repair HTML5 Template",
     description: siteDescription,
   },
 };

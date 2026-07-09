@@ -16,7 +16,7 @@ const FIELD_LABELS: Record<ContactField, string> = {
   name: "Name",
   email: "Email",
   phone: "Phone",
-  subject: "Service Needed / Location",
+  subject: "Subject",
   message: "Message",
 };
 
@@ -58,7 +58,7 @@ export default function ContactForm() {
 
     form.reset();
     setSubmitState("success");
-    setStatusMessage("Your roadside assistance request has been sent. Dispatch will contact you shortly.");
+    setStatusMessage("Your message has been sent. We will contact you shortly.");
   }
 
   function renderFieldErrors(field: ContactField) {
@@ -78,7 +78,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="te-comment-form" noValidate>
       <h3>
-        Need Immediate <br /> Roadside Assistance?
+        We Can Take Your <br /> Business To Growth
       </h3>
       <div className="row gx-4">
         <div className="col-xl-6">
@@ -122,7 +122,7 @@ export default function ContactForm() {
             <input
               name="subject"
               type="text"
-              placeholder="Service Needed / Location"
+              placeholder="Subject"
               aria-describedby={fieldErrors.subject?.length ? "contact-subject-error" : undefined}
             />
             {renderFieldErrors("subject")}
@@ -134,7 +134,7 @@ export default function ContactForm() {
               name="message"
               cols={20}
               rows={3}
-              placeholder="Describe your emergency and exact location"
+              placeholder="Write your Message here"
               aria-describedby={fieldErrors.message?.length ? "contact-message-error" : undefined}
             />
             {renderFieldErrors("message")}
@@ -147,7 +147,7 @@ export default function ContactForm() {
         ) : null}
         <div className="col-12">
           <button className="te-theme-btn style-2" type="submit" disabled={submitState === "submitting"}>
-            {submitState === "submitting" ? "SENDING..." : "REQUEST HELP"}
+            {submitState === "submitting" ? "SENDING..." : "SEND NOW"}
           </button>
         </div>
       </div>

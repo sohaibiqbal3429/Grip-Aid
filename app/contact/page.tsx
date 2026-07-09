@@ -3,7 +3,7 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
   path: "/contact",
-  title: "Contact Us - Roadside Assistance Services",
+  title: "Contact Us - Car Service & Repair HTML5 Template",
 });
 
 
