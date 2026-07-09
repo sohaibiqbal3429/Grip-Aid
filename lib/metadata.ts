@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
 
-export const siteName = "Automec";
-export const siteDescription = "Automec - Car Service & Repair HTML5 Template";
+export const siteName = "RoadRescue Pro";
+export const siteDescription =
+  "RoadRescue Pro provides fast mobile roadside assistance, emergency towing, flat tire help, battery jump starts, fuel delivery, vehicle lockout service, and 24/7 roadside help at your location.";
 export const siteKeywords = [
-  "auto care",
-  "auto center",
-  "auto repair",
-  "auto service",
-  "auto shop",
-  "automotive",
-  "car mechanic",
-  "car repair",
-  "car service",
-  "car shop",
-  "garage",
-  "mechanic",
-  "mechanic auto shop",
-  "mechanic workshop",
+  "Roadside Assistance",
+  "Emergency Roadside Assistance",
+  "Mobile Roadside Assistance",
+  "Flat Tire Assistance",
+  "Battery Jump Start",
+  "Fuel Delivery Service",
+  "Vehicle Lockout Service",
+  "Emergency Towing",
+  "24/7 Roadside Help",
+  "roadside help near me",
 ];
 
 export type PublicRoute = {
@@ -50,19 +47,19 @@ function resolveSiteUrl(): string {
 export const siteUrl = resolveSiteUrl();
 
 export const publicRoutes: PublicRoute[] = [
-  { path: "/", title: "Home - Car Service & Repair HTML5 Template" },
-  { path: "/home-2", title: "Home-2 - Car Service & Repair HTML5 Template" },
-  { path: "/about", title: "About Us - Car Service & Repair HTML5 Template" },
-  { path: "/services", title: "Services - Car Service & Repair HTML5 Template" },
-  { path: "/services/details", title: "Service Details - Car Service & Repair HTML5 Template" },
-  { path: "/projects", title: "Projects - Car Service & Repair HTML5 Template" },
-  { path: "/projects/details", title: "Project Details - Car Service & Repair HTML5 Template" },
-  { path: "/blog", title: "Blog - Car Service & Repair HTML5 Template" },
-  { path: "/blog/details", title: "Blog Details - Car Service & Repair HTML5 Template" },
-  { path: "/team", title: "Team Member - Car Service & Repair HTML5 Template" },
-  { path: "/team/details", title: "Team Details - Car Service & Repair HTML5 Template" },
-  { path: "/contact", title: "Contact Us - Car Service & Repair HTML5 Template" },
-  { path: "/search", title: "Search - Car Service & Repair HTML5 Template" },
+  { path: "/", title: "Home - Roadside Assistance Services" },
+  { path: "/home-2", title: "Emergency Help - Roadside Assistance Services" },
+  { path: "/about", title: "About Us - Roadside Assistance Services" },
+  { path: "/services", title: "Services - Roadside Assistance Services" },
+  { path: "/services/details", title: "Roadside Service Details - Roadside Assistance Services" },
+  { path: "/projects", title: "Roadside Assistance Cases - Roadside Assistance Services" },
+  { path: "/projects/details", title: "Roadside Response Details - Roadside Assistance Services" },
+  { path: "/blog", title: "Blog - Roadside Assistance Services" },
+  { path: "/blog/details", title: "Blog Details - Roadside Assistance Services" },
+  { path: "/team", title: "Roadside Assistance Team - Roadside Assistance Services" },
+  { path: "/team/details", title: "Team Details - Roadside Assistance Services" },
+  { path: "/contact", title: "Contact Us - Roadside Assistance Services" },
+  { path: "/search", title: "Search - Roadside Assistance Services" },
 ];
 
 export function absoluteUrl(path = "/"): string {
