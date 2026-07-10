@@ -65,25 +65,13 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         <div className="gripaid-topbar">
           <div className="container">
             <div className="gripaid-topbar__inner">
-              <div className="gripaid-topbar__items">
-                <a href={supportPhoneHref}>
-                  <i className="fa-solid fa-phone-volume" aria-hidden="true" />
-                  {supportPhoneDisplay}
-                </a>
-                <a href={supportEmailHref}>
-                  <i className="fa-solid fa-envelope" aria-hidden="true" />
-                  {supportEmail}
-                </a>
-                <span>
-                  <i className="fa-solid fa-location-dot" aria-hidden="true" />
-                  {coverageLine}
-                </span>
+              <div className="gripaid-topbar__items gripaid-topbar__items--contact">
+                <a href={supportPhoneHref}>{supportPhoneDisplay}</a>
+                <span aria-hidden="true">|</span>
+                <a href={supportEmailHref}>{supportEmail}</a>
               </div>
-              <div className="gripaid-topbar__items">
-                <span>
-                  <i className="fa-solid fa-clock" aria-hidden="true" />
-                  {supportHours}
-                </span>
+              <div className="gripaid-topbar__items gripaid-topbar__items--dispatch">
+                <span>{supportHours}. Serving drivers nationwide.</span>
               </div>
             </div>
           </div>
@@ -94,15 +82,12 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               <Logo />
               <nav className="gripaid-nav" aria-label="Primary navigation">
                 {navItems.map((item) => (
-                  <Link key={item.href} href={item.href}>
+                  <Link className={item.href === "/" ? "is-active" : undefined} key={item.href} href={item.href}>
                     {item.label}
                   </Link>
                 ))}
               </nav>
               <div className="gripaid-navbar__actions">
-                <a className="gripaid-link-btn" href={supportPhoneHref}>
-                  Call Now
-                </a>
                 <Link className="gripaid-btn gripaid-btn--solid" href="/contact">
                   Request Assistance
                 </Link>
@@ -178,7 +163,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             </div>
           </div>
           <div className="gripaid-footer__bottom">
-            <p>{siteName} delivers mobile roadside assistance, towing, lockout help, jump starts, and fuel delivery.</p>
+            <p>{siteName} delivers mobile roadside assistance, towing, lockout help, jump starts, and puncture service.</p>
             <div className="gripaid-footer__bottom-links">
               <Link href="/about">About</Link>
               <Link href="/services">Services</Link>
@@ -194,44 +179,69 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 }
 
 export function HeroSection() {
+  const heroServices = [
+    { title: "Towing", icon: "fa-solid fa-truck-pickup" },
+    { title: "Jump Start", icon: "fa-solid fa-car-battery" },
+    { title: "Puncture Service", icon: "fa-solid fa-screwdriver-wrench" },
+    { title: "24/7 Support", icon: "fa-solid fa-headset" },
+  ];
+
   return (
     <section className="gripaid-hero" style={{ backgroundImage: `url(${imageLibrary.heroPrimary})` }}>
       <div className="gripaid-hero__overlay" />
       <div className="container">
-        <div className="row align-items-center g-5">
-          <div className="col-lg-7">
+        <div className="row align-items-center g-5 gripaid-hero__main">
+          <div className="col-xl-7 col-lg-6">
             <div className="gripaid-hero__content">
               <span className="gripaid-eyebrow">24/7 Mobile Roadside Assistance</span>
-              <h1>Need Roadside Assistance? We&apos;re Already On The Way.</h1>
+              <h1>Stranded? We&apos;re Already On The Way.</h1>
               <p>
-                No need to go anywhere. Our roadside assistance comes directly to you with fast
-                dispatch, reliable technicians, and professional emergency vehicle support.
+                No need to panic. Our expert technicians are dispatched instantly to your location,
+                providing fast, reliable emergency vehicle support and getting you back on the road safely.
               </p>
               <div className="gripaid-actions">
-                <a className="gripaid-btn gripaid-btn--solid" href={supportPhoneHref}>
-                  Call Now
-                </a>
-                <Link className="gripaid-btn gripaid-btn--outline" href="/contact">
-                  Get Help Now
+                <Link className="gripaid-btn gripaid-btn--solid" href="/contact">
+                  Request Help Now
                 </Link>
-              </div>
-              <div className="gripaid-hero__badges">
-                <span>We come to your location</span>
-                <span>Fast dispatch support</span>
-                <span>Emergency towing available</span>
+                <a className="gripaid-btn gripaid-btn--outline" href={supportPhoneHref}>
+                  Call Emergency Line
+                </a>
               </div>
             </div>
           </div>
-          <div className="col-lg-5">
-            <div className="gripaid-hero__stats">
-              {stats.map((stat) => (
-                <div className="gripaid-stat-card" key={stat.label}>
-                  <strong>{stat.value}</strong>
-                  <span>{stat.label}</span>
+          <div className="col-xl-5 col-lg-6">
+            <div className="gripaid-dispatch-panel" aria-label="Emergency dispatch status">
+              <div className="gripaid-dispatch-panel__summary">
+                <div className="gripaid-dispatch-panel__status">
+                  <span>Emergency Dispatch</span>
+                  <strong>
+                    <i className="fa-solid fa-circle" aria-hidden="true" />
+                    Available Now
+                  </strong>
                 </div>
-              ))}
+                <div className="gripaid-dispatch-panel__time">
+                  <strong>30-Min</strong>
+                  <span>Response Time</span>
+                </div>
+              </div>
+              <div className="gripaid-dispatch-panel__services">
+                {heroServices.map((service) => (
+                  <div className="gripaid-dispatch-service" key={service.title}>
+                    <i className={service.icon} aria-hidden="true" />
+                    <span>{service.title}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+        <div className="gripaid-hero__trustbar" aria-label="Service promises">
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <i className={stat.icon} aria-hidden="true" />
+              <span>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -865,7 +875,7 @@ export function BlogDetailsPageContent() {
               <h2>2. Share clear details with roadside dispatch</h2>
               <p>
                 Tell the dispatcher your location, the vehicle problem, whether you are blocking
-                traffic, and if the issue sounds like a tire, battery, fuel, lockout, or mechanical
+                traffic, and if the issue sounds like a tire, battery, puncture, lockout, or mechanical
                 breakdown.
               </p>
               <h2>3. Stay calm while help comes to you</h2>
