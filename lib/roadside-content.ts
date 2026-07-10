@@ -19,7 +19,7 @@ export const imageLibrary = {
   jumpStart:
     "https://images.pexels.com/photos/6907042/pexels-photo-6907042.jpeg?cs=srgb&dl=pexels-sinileunen-6907042.jpg&fm=jpg",
   punctureService:
-    "https://images.pexels.com/photos/20500734/pexels-photo-20500734.jpeg?cs=srgb&dl=pexels-enginakyurt-20500734.jpg&fm=jpg",
+    "https://images.pexels.com/photos/9518248/pexels-photo-9518248.jpeg?cs=srgb&dl=pexels-ron-lach-9518248.jpg&fm=jpg",
   driverCall:
     "https://images.pexels.com/photos/4173086/pexels-photo-4173086.jpeg?cs=srgb&dl=pexels-gustavo-fring-4173086.jpg&fm=jpg",
   roadsideRepair:
