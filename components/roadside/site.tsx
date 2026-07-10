@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import BackToTop from "@/components/BackToTop";
 import MobileNav from "@/components/MobileNav";
+import HeaderNav from "@/components/roadside/HeaderNav";
 import ContactFormAlt from "@/components/forms/ContactFormAlt";
 import {
   blogArticles,
@@ -67,12 +68,21 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           <div className="container">
             <div className="gripaid-topbar__inner">
               <div className="gripaid-topbar__items gripaid-topbar__items--contact">
-                <a href={supportPhoneHref}>{supportPhoneDisplay}</a>
-                <span aria-hidden="true">|</span>
-                <a href={supportEmailHref}>{supportEmail}</a>
+                <a href={supportPhoneHref}>
+                  <i className="fa-regular fa-phone" aria-hidden="true" />
+                  {supportPhoneDisplay}
+                </a>
+                <span className="gripaid-topbar__divider" aria-hidden="true" />
+                <a href={supportEmailHref}>
+                  <i className="fa-regular fa-envelope" aria-hidden="true" />
+                  {supportEmail}
+                </a>
               </div>
               <div className="gripaid-topbar__items gripaid-topbar__items--dispatch">
-                <span>{supportHours}. Serving drivers nationwide.</span>
+                <span>
+                  <i className="fa-regular fa-shield-check" aria-hidden="true" />
+                  <strong>24/7</strong> Emergency Dispatch. Serving drivers <strong>nationwide.</strong>
+                </span>
               </div>
             </div>
           </div>
@@ -81,16 +91,14 @@ export function SiteChrome({ children }: { children: ReactNode }) {
           <div className="container">
             <div className="gripaid-navbar__inner">
               <Logo />
-              <nav className="gripaid-nav" aria-label="Primary navigation">
-                {navItems.map((item) => (
-                  <Link className={item.href === "/" ? "is-active" : undefined} key={item.href} href={item.href}>
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
+              <HeaderNav />
               <div className="gripaid-navbar__actions">
-                <Link className="gripaid-btn gripaid-btn--solid" href="/contact">
-                  Request Assistance
+                <Link className="gripaid-btn gripaid-btn--solid gripaid-btn--header" href="/contact">
+                  <span className="gripaid-btn__icon" aria-hidden="true">
+                    <i className="fa-solid fa-phone" />
+                  </span>
+                  <span>Request Assistance</span>
+                  <i className="fa-regular fa-arrow-right" aria-hidden="true" />
                 </Link>
               </div>
             </div>
