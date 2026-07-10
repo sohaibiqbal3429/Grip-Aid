@@ -12,6 +12,7 @@ import {
   faqs,
   imageLibrary,
   navItems,
+  processHighlights,
   processSteps,
   serviceChecklist,
   services,
@@ -381,27 +382,53 @@ export function TrustGrid() {
 
 export function ProcessSection() {
   return (
-    <section className="gripaid-section gripaid-section--dark">
+    <section className="gripaid-section gripaid-section--dark gripaid-process-showcase">
       <div className="container">
-        <SectionHeading
-          eyebrow="How It Works"
-          title="Simple dispatch steps that get help moving fast"
-          copy="Roadside emergencies need a clear process. This four-step flow explains exactly how support reaches the customer."
-          center
-        />
-        <div className="row g-4">
-          {processSteps.map((step, index) => (
-            <div className="col-md-6 col-xl-3" key={step.title}>
-              <article className="gripaid-process-card">
-                <span className="gripaid-process-card__number">0{index + 1}</span>
-                <div className="gripaid-icon-circle">
-                  <i className={step.icon} aria-hidden="true" />
+        <div className="gripaid-process-panel">
+          <div className="gripaid-process-heading">
+            <p className="gripaid-process-heading__eyebrow">Simple, Luxury Assistance.</p>
+            <h2>
+              How It <span>Works</span>
+            </h2>
+            <div className="gripaid-process-heading__rule" aria-hidden="true" />
+          </div>
+
+          <div className="gripaid-process-timeline">
+            {processSteps.map((step, index) => (
+              <article className="gripaid-process-card" key={step.title}>
+                <div className="gripaid-process-card__icon-wrap">
+                  <div className="gripaid-process-card__icon">
+                    <i className={step.icon} aria-hidden="true" />
+                  </div>
+                  {index < processSteps.length - 1 ? (
+                    <span className="gripaid-process-card__connector" aria-hidden="true">
+                      <i className="fa-solid fa-chevron-right" aria-hidden="true" />
+                    </span>
+                  ) : null}
+                  <span className="gripaid-process-card__number">0{index + 1}</span>
                 </div>
-                <h3>{step.title}</h3>
-                <p>{step.copy}</p>
+                <div className="gripaid-process-card__content">
+                  <span>Step</span>
+                  <h3>{step.title}</h3>
+                  <div className="gripaid-process-card__rule" aria-hidden="true" />
+                  <p>{step.copy}</p>
+                </div>
               </article>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <div className="gripaid-process-highlights">
+            {processHighlights.map((item) => (
+              <article className="gripaid-process-highlight" key={item.title}>
+                <i className={item.icon} aria-hidden="true" />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                  <span aria-hidden="true" />
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

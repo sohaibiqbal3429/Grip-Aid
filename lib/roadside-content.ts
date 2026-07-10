@@ -251,23 +251,46 @@ export const trustPoints = [
 export const processSteps = [
   {
     title: "Call Us",
-    copy: "Reach our dispatch team and tell us what happened.",
-    icon: "fa-solid fa-phone-volume",
+    copy: "Reach our exclusive dispatch team. Tell us your situation in detail.",
+    icon: "fa-solid fa-phone",
   },
   {
     title: "Share Your Location",
-    copy: "We confirm where your vehicle is and the type of help you need.",
-    icon: "fa-solid fa-location-crosshairs",
+    copy: "We utilize precision GPS to locate your vehicle instantly.",
+    icon: "fa-solid fa-earth-americas",
   },
   {
     title: "Technician Is Dispatched",
-    copy: "A roadside assistance vehicle heads directly to you with the proper equipment.",
-    icon: "fa-solid fa-truck-fast",
+    copy: "A luxury roadside vehicle is deployed to you with specialized equipment.",
+    icon: "fa-solid fa-truck-pickup",
   },
   {
     title: "Back On The Road",
-    copy: "We fix the issue on site when possible or tow your vehicle to the right place.",
-    icon: "fa-solid fa-road",
+    copy: "We provide on-site solutions or secure towing to get you moving again.",
+    icon: "fa-solid fa-shield-check",
+  },
+];
+
+export const processHighlights = [
+  {
+    title: "24/7 Support",
+    copy: "Always here for you",
+    icon: "fa-solid fa-shield-check",
+  },
+  {
+    title: "Fast Response",
+    copy: "Quick arrival, every time",
+    icon: "fa-solid fa-clock",
+  },
+  {
+    title: "Premium Service",
+    copy: "Luxury assistance, anywhere",
+    icon: "fa-regular fa-gem",
+  },
+  {
+    title: "Expert Technicians",
+    copy: "Professionals you can trust",
+    icon: "fa-regular fa-user",
   },
 ];
 
