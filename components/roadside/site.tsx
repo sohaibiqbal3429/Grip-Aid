@@ -178,7 +178,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
             </div>
           </div>
           <div className="gripaid-footer__bottom">
-            <p>{siteName} delivers mobile roadside assistance, towing, lockout help, jump starts, and fuel delivery.</p>
+            <p>{siteName} delivers mobile roadside assistance, towing, lockout help, jump starts, and puncture service.</p>
             <div className="gripaid-footer__bottom-links">
               <Link href="/about">About</Link>
               <Link href="/services">Services</Link>
@@ -194,44 +194,67 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 }
 
 export function HeroSection() {
+  const heroServices = [
+    { title: "Towing", icon: "fa-solid fa-truck-pickup" },
+    { title: "Jump Start", icon: "fa-solid fa-car-battery" },
+    { title: "Puncture Service", icon: "fa-solid fa-screwdriver-wrench" },
+    { title: "24/7 Support", icon: "fa-solid fa-headset" },
+  ];
+
   return (
     <section className="gripaid-hero" style={{ backgroundImage: `url(${imageLibrary.heroPrimary})` }}>
       <div className="gripaid-hero__overlay" />
       <div className="container">
-        <div className="row align-items-center g-5">
-          <div className="col-lg-7">
+        <div className="row align-items-center g-5 gripaid-hero__main">
+          <div className="col-xl-7 col-lg-6">
             <div className="gripaid-hero__content">
               <span className="gripaid-eyebrow">24/7 Mobile Roadside Assistance</span>
-              <h1>Need Roadside Assistance? We&apos;re Already On The Way.</h1>
+              <h1>Stranded? We&apos;re Already On The Way.</h1>
               <p>
-                No need to go anywhere. Our roadside assistance comes directly to you with fast
-                dispatch, reliable technicians, and professional emergency vehicle support.
+                No need to panic. GripAid dispatches trusted roadside technicians directly to your
+                location with fast, reliable emergency vehicle support.
               </p>
               <div className="gripaid-actions">
-                <a className="gripaid-btn gripaid-btn--solid" href={supportPhoneHref}>
-                  Call Now
-                </a>
-                <Link className="gripaid-btn gripaid-btn--outline" href="/contact">
-                  Get Help Now
+                <Link className="gripaid-btn gripaid-btn--solid" href="/contact">
+                  Request Help Now
                 </Link>
-              </div>
-              <div className="gripaid-hero__badges">
-                <span>We come to your location</span>
-                <span>Fast dispatch support</span>
-                <span>Emergency towing available</span>
+                <a className="gripaid-btn gripaid-btn--outline" href={supportPhoneHref}>
+                  Call Emergency Line
+                </a>
               </div>
             </div>
           </div>
-          <div className="col-lg-5">
-            <div className="gripaid-hero__stats">
-              {stats.map((stat) => (
-                <div className="gripaid-stat-card" key={stat.label}>
-                  <strong>{stat.value}</strong>
-                  <span>{stat.label}</span>
-                </div>
-              ))}
+          <div className="col-xl-5 col-lg-6">
+            <div className="gripaid-dispatch-panel" aria-label="Emergency dispatch status">
+              <div className="gripaid-dispatch-panel__status">
+                <span>Emergency Dispatch</span>
+                <strong>
+                  <i className="fa-solid fa-circle" aria-hidden="true" />
+                  Available Now
+                </strong>
+              </div>
+              <div className="gripaid-dispatch-panel__time">
+                <strong>30-Min</strong>
+                <span>Response Time</span>
+              </div>
+              <div className="gripaid-dispatch-panel__services">
+                {heroServices.map((service) => (
+                  <div className="gripaid-dispatch-service" key={service.title}>
+                    <i className={service.icon} aria-hidden="true" />
+                    <span>{service.title}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+        <div className="gripaid-hero__trustbar" aria-label="Service promises">
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <i className={stat.icon} aria-hidden="true" />
+              <span>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -865,7 +888,7 @@ export function BlogDetailsPageContent() {
               <h2>2. Share clear details with roadside dispatch</h2>
               <p>
                 Tell the dispatcher your location, the vehicle problem, whether you are blocking
-                traffic, and if the issue sounds like a tire, battery, fuel, lockout, or mechanical
+                traffic, and if the issue sounds like a tire, battery, puncture, lockout, or mechanical
                 breakdown.
               </p>
               <h2>3. Stay calm while help comes to you</h2>

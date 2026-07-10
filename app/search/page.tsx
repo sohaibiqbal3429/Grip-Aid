@@ -50,7 +50,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                     ))}
                   </div>
                 ) : (
-                  <p>No roadside pages or articles matched that search. Try terms like towing, jump start, fuel delivery, or lockout.</p>
+                  <p>No roadside pages or articles matched that search. Try terms like towing, jump start, puncture service, or lockout.</p>
                 )}
               </>
             ) : (

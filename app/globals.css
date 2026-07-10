@@ -5,11 +5,11 @@
   --gripaid-ink: #142033;
   --gripaid-muted: #596579;
   --gripaid-line: #d8e0eb;
-  --gripaid-brand: #f24c1a;
-  --gripaid-brand-dark: #c9390f;
+  --gripaid-brand: #eb3300;
+  --gripaid-brand-dark: #c42b00;
   --gripaid-brand-soft: #fff2ed;
-  --gripaid-dark: #081120;
-  --gripaid-dark-soft: #15233a;
+  --gripaid-dark: #0a0d13;
+  --gripaid-dark-soft: #161b25;
   --gripaid-shadow: 0 24px 60px rgba(10, 20, 38, 0.08);
   --gripaid-radius: 24px;
 }
@@ -202,7 +202,10 @@ main {
 }
 
 .gripaid-hero {
-  padding: 7rem 0 6rem;
+  min-height: 720px;
+  padding: 6.5rem 0 3.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .gripaid-page-banner {
@@ -213,7 +216,10 @@ main {
 .gripaid-page-banner__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(115deg, rgba(8, 17, 32, 0.9), rgba(8, 17, 32, 0.6));
+  background:
+    radial-gradient(circle at 78% 24%, rgba(255, 255, 255, 0.1), transparent 24%),
+    linear-gradient(90deg, rgba(10, 13, 19, 0.98) 0%, rgba(10, 13, 19, 0.76) 47%, rgba(10, 13, 19, 0.42) 100%),
+    linear-gradient(180deg, rgba(10, 13, 19, 0.18), rgba(10, 13, 19, 0.82));
 }
 
 .gripaid-hero .container,
@@ -238,9 +244,10 @@ main {
 }
 
 .gripaid-hero__content h1 {
-  max-width: 11ch;
-  font-size: clamp(2.7rem, 6vw, 5rem);
+  max-width: 12ch;
+  font-size: clamp(3.1rem, 6.8vw, 5.7rem);
   margin: 0.8rem 0 1rem;
+  text-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
 }
 
 .gripaid-page-banner__content {
@@ -388,10 +395,118 @@ main {
   font-size: 1.3rem;
 }
 
-.gripaid-hero__stats {
+.gripaid-hero__main {
+  min-height: 500px;
+}
+
+.gripaid-dispatch-panel {
   display: grid;
   gap: 1rem;
+  margin-left: auto;
+  max-width: 430px;
+}
+
+.gripaid-dispatch-panel__status,
+.gripaid-dispatch-panel__time,
+.gripaid-dispatch-service,
+.gripaid-hero__trustbar {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  backdrop-filter: blur(18px);
+}
+
+.gripaid-dispatch-panel__status,
+.gripaid-dispatch-panel__time {
+  border-radius: 22px;
+  color: #ffffff;
+  padding: 1.3rem 1.45rem;
+}
+
+.gripaid-dispatch-panel__status {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.gripaid-dispatch-panel__status span {
+  font-size: 1.05rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.gripaid-dispatch-panel__status strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: fit-content;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(37, 190, 90, 0.78);
+  box-shadow: 0 0 28px rgba(37, 190, 90, 0.62);
+}
+
+.gripaid-dispatch-panel__status i {
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.gripaid-dispatch-panel__time {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gripaid-dispatch-panel__time strong {
+  font-size: clamp(2.5rem, 5vw, 3.9rem);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.gripaid-dispatch-panel__time span {
+  max-width: 110px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.gripaid-dispatch-panel__services {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.gripaid-dispatch-service {
+  min-height: 128px;
+  border-radius: 18px;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  gap: 0.65rem;
+  padding: 1.1rem;
+  text-align: center;
+  font-weight: 900;
+}
+
+.gripaid-dispatch-service i {
+  font-size: 2.55rem;
+}
+
+.gripaid-hero__trustbar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  border-radius: 16px;
+  color: #ffffff;
+  margin-top: 2.7rem;
+  padding: 0.95rem 1.25rem;
+}
+
+.gripaid-hero__trustbar div {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.02rem;
 }
 
 .gripaid-stat-card {
@@ -807,6 +922,11 @@ main {
   .gripaid-hero {
     padding-top: 5.5rem;
   }
+
+  .gripaid-dispatch-panel {
+    margin-left: 0;
+    max-width: none;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -816,6 +936,24 @@ main {
 
   .gripaid-hero__stats {
     grid-template-columns: 1fr;
+  }
+
+  .gripaid-hero {
+    min-height: auto;
+    padding: 4.5rem 0 2.5rem;
+  }
+
+  .gripaid-hero__main {
+    min-height: auto;
+  }
+
+  .gripaid-dispatch-panel__services {
+    grid-template-columns: 1fr;
+  }
+
+  .gripaid-hero__trustbar {
+    justify-content: flex-start;
+    gap: 0.85rem;
   }
 
   .gripaid-section,

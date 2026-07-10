@@ -18,7 +18,7 @@ export const imageLibrary = {
     "https://images.pexels.com/photos/17429096/pexels-photo-17429096.jpeg?cs=srgb&dl=pexels-jonathan-reynaga-861774-17429096.jpg&fm=jpg",
   jumpStart:
     "https://images.pexels.com/photos/6907042/pexels-photo-6907042.jpeg?cs=srgb&dl=pexels-sinileunen-6907042.jpg&fm=jpg",
-  fuelDelivery:
+  punctureService:
     "https://images.pexels.com/photos/20500734/pexels-photo-20500734.jpeg?cs=srgb&dl=pexels-enginakyurt-20500734.jpg&fm=jpg",
   driverCall:
     "https://images.pexels.com/photos/4173086/pexels-photo-4173086.jpeg?cs=srgb&dl=pexels-gustavo-fring-4173086.jpg&fm=jpg",
@@ -54,7 +54,7 @@ export const publicRoutes: PublicRoute[] = [
     path: "/",
     title: "24/7 Roadside Assistance | GripAid",
     description:
-      "GripAid provides fast mobile roadside assistance, towing, jump starts, flat tire help, lockout service, and fuel delivery directly at your location.",
+      "GripAid provides fast mobile roadside assistance, towing, jump starts, flat tire help, lockout service, and puncture service directly at your location.",
   },
   {
     path: "/home-2",
@@ -72,7 +72,7 @@ export const publicRoutes: PublicRoute[] = [
     path: "/services",
     title: "Roadside Assistance Services | GripAid",
     description:
-      "Browse GripAid roadside assistance services including flat tire changes, jump starts, fuel delivery, lockout help, towing, and minor repairs.",
+      "Browse GripAid roadside assistance services including flat tire changes, jump starts, puncture service, lockout help, towing, and minor repairs.",
   },
   {
     path: "/services/details",
@@ -114,13 +114,13 @@ export const publicRoutes: PublicRoute[] = [
     path: "/team/details",
     title: "Driver Support FAQ | GripAid",
     description:
-      "Find answers to common roadside assistance questions about response times, towing, lockouts, fuel delivery, and coverage.",
+      "Find answers to common roadside assistance questions about response times, towing, lockouts, puncture service, and coverage.",
   },
   {
     path: "/contact",
     title: "Request Roadside Assistance | GripAid",
     description:
-      "Contact GripAid to request roadside assistance, towing, jump starts, lockout service, fuel delivery, or general support.",
+      "Contact GripAid to request roadside assistance, towing, jump starts, lockout service, puncture service, or general support.",
   },
   {
     path: "/search",
@@ -140,7 +140,7 @@ export const siteKeywords = [
   "mobile roadside assistance",
   "flat tire service",
   "battery jump start",
-  "fuel delivery",
+  "puncture service",
   "car lockout service",
   "emergency towing",
   "vehicle breakdown help",
@@ -178,13 +178,13 @@ export const services: ServiceItem[] = [
     icon: "fa-solid fa-car-battery",
   },
   {
-    id: "fuel-delivery",
-    title: "Fuel Delivery",
-    short: "If you run out of fuel, we bring enough gas to get you safely to the next station.",
+    id: "puncture-service",
+    title: "Puncture Service",
+    short: "Mobile help for punctures, tire damage, spare installation, and safe next-step guidance.",
     detail:
-      "There is no need to leave your car or walk for help. We deliver emergency fuel to your location so you can continue your trip with less stress and less delay.",
-    image: imageLibrary.fuelDelivery,
-    icon: "fa-solid fa-gas-pump",
+      "There is no need to leave your car or walk for help. We send puncture support to your location, inspect the damage, install your spare when available, and help you continue safely.",
+    image: imageLibrary.punctureService,
+    icon: "fa-solid fa-screwdriver-wrench",
   },
   {
     id: "vehicle-lockout",
@@ -272,10 +272,9 @@ export const processSteps = [
 ];
 
 export const stats = [
-  { value: "24/7", label: "Emergency roadside support" },
-  { value: "6", label: "Core mobile services" },
-  { value: "1 Call", label: "To dispatch help fast" },
-  { value: "On-Site", label: "Service at your location" },
+  { value: "24/7", label: "Nationwide Coverage", icon: "fa-solid fa-globe" },
+  { value: "6", label: "Certified Technicians", icon: "fa-regular fa-user" },
+  { value: "1 Call", label: "Real-Time Tracking Available", icon: "fa-solid fa-location-arrow" },
 ];
 
 export const faqs = [
@@ -305,9 +304,9 @@ export const faqs = [
       "We explain the next step clearly and arrange safe towing so your vehicle reaches the most practical destination without extra confusion.",
   },
   {
-    question: "Do you offer fuel delivery?",
+    question: "Do you offer puncture service?",
     answer:
-      "Yes. If you run out of fuel, we bring enough to get you moving and back toward a fuel station safely.",
+      "Yes. If you get a puncture, we inspect the tire damage, install your spare when available, and help you move safely toward the right repair option.",
   },
   {
     question: "Are your services available 24/7?",
@@ -336,7 +335,7 @@ export const testimonials = [
   },
   {
     name: "Priya S.",
-    role: "Fuel delivery request",
+    role: "Puncture service request",
     quote:
       "The whole experience felt calm and professional. I shared my location, they came to me, and I was moving again much faster than I expected.",
   },
@@ -383,7 +382,7 @@ export const teamRoles = [
   },
   {
     title: "Roadside Technicians",
-    copy: "Hands-on specialists who handle jump starts, tire changes, lockouts, fuel delivery, and practical roadside troubleshooting.",
+    copy: "Hands-on specialists who handle jump starts, tire changes, lockouts, puncture service, and practical roadside troubleshooting.",
     icon: "fa-solid fa-wrench",
   },
   {
@@ -439,7 +438,7 @@ export const blogArticles = [
 
 export const serviceChecklist = [
   "Share your exact location and nearby landmarks.",
-  "Tell us whether the issue is a tire, battery, fuel, lockout, or mechanical problem.",
+  "Tell us whether the issue is a tire, battery, puncture, lockout, or mechanical problem.",
   "Let dispatch know if you are in a high-traffic or unsafe area.",
   "Stay with the vehicle only when it is safe to do so.",
   "Keep your phone nearby so the technician can reach you if needed.",
