@@ -65,25 +65,13 @@ export function SiteChrome({ children }: { children: ReactNode }) {
         <div className="gripaid-topbar">
           <div className="container">
             <div className="gripaid-topbar__inner">
-              <div className="gripaid-topbar__items">
-                <a href={supportPhoneHref}>
-                  <i className="fa-solid fa-phone-volume" aria-hidden="true" />
-                  {supportPhoneDisplay}
-                </a>
-                <a href={supportEmailHref}>
-                  <i className="fa-solid fa-envelope" aria-hidden="true" />
-                  {supportEmail}
-                </a>
-                <span>
-                  <i className="fa-solid fa-location-dot" aria-hidden="true" />
-                  {coverageLine}
-                </span>
+              <div className="gripaid-topbar__items gripaid-topbar__items--contact">
+                <a href={supportPhoneHref}>{supportPhoneDisplay}</a>
+                <span aria-hidden="true">|</span>
+                <a href={supportEmailHref}>{supportEmail}</a>
               </div>
-              <div className="gripaid-topbar__items">
-                <span>
-                  <i className="fa-solid fa-clock" aria-hidden="true" />
-                  {supportHours}
-                </span>
+              <div className="gripaid-topbar__items gripaid-topbar__items--dispatch">
+                <span>{supportHours}. Serving drivers nationwide.</span>
               </div>
             </div>
           </div>
@@ -94,15 +82,12 @@ export function SiteChrome({ children }: { children: ReactNode }) {
               <Logo />
               <nav className="gripaid-nav" aria-label="Primary navigation">
                 {navItems.map((item) => (
-                  <Link key={item.href} href={item.href}>
+                  <Link className={item.href === "/" ? "is-active" : undefined} key={item.href} href={item.href}>
                     {item.label}
                   </Link>
                 ))}
               </nav>
               <div className="gripaid-navbar__actions">
-                <a className="gripaid-link-btn" href={supportPhoneHref}>
-                  Call Now
-                </a>
                 <Link className="gripaid-btn gripaid-btn--solid" href="/contact">
                   Request Assistance
                 </Link>
@@ -211,8 +196,8 @@ export function HeroSection() {
               <span className="gripaid-eyebrow">24/7 Mobile Roadside Assistance</span>
               <h1>Stranded? We&apos;re Already On The Way.</h1>
               <p>
-                No need to panic. GripAid dispatches trusted roadside technicians directly to your
-                location with fast, reliable emergency vehicle support.
+                No need to panic. Our expert technicians are dispatched instantly to your location,
+                providing fast, reliable emergency vehicle support and getting you back on the road safely.
               </p>
               <div className="gripaid-actions">
                 <Link className="gripaid-btn gripaid-btn--solid" href="/contact">
@@ -226,16 +211,18 @@ export function HeroSection() {
           </div>
           <div className="col-xl-5 col-lg-6">
             <div className="gripaid-dispatch-panel" aria-label="Emergency dispatch status">
-              <div className="gripaid-dispatch-panel__status">
-                <span>Emergency Dispatch</span>
-                <strong>
-                  <i className="fa-solid fa-circle" aria-hidden="true" />
-                  Available Now
-                </strong>
-              </div>
-              <div className="gripaid-dispatch-panel__time">
-                <strong>30-Min</strong>
-                <span>Response Time</span>
+              <div className="gripaid-dispatch-panel__summary">
+                <div className="gripaid-dispatch-panel__status">
+                  <span>Emergency Dispatch</span>
+                  <strong>
+                    <i className="fa-solid fa-circle" aria-hidden="true" />
+                    Available Now
+                  </strong>
+                </div>
+                <div className="gripaid-dispatch-panel__time">
+                  <strong>30-Min</strong>
+                  <span>Response Time</span>
+                </div>
               </div>
               <div className="gripaid-dispatch-panel__services">
                 {heroServices.map((service) => (
