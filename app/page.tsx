@@ -1,12 +1,8 @@
-import LegacyPage from "@/components/LegacyPage";
-import { createPageMetadata } from "@/lib/metadata";
+import { HomePageContent } from "@/components/roadside/site";
+import { createPageMetadata, getPublicRoute } from "@/lib/metadata";
 
-export const metadata = createPageMetadata({
-  path: "/",
-  title: "Home - Car Service & Repair HTML5 Template",
-});
-
+export const metadata = createPageMetadata(getPublicRoute("/"));
 
 export default function Page() {
-  return <LegacyPage page="home" />;
+  return <HomePageContent />;
 }

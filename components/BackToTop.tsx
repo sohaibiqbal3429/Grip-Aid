@@ -31,7 +31,7 @@ export default function BackToTop({ threshold = 300 }: BackToTopProps) {
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     >
-      ↑
+      Top
     </button>
   );
 }

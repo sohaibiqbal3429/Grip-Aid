@@ -1,12 +1,8 @@
-import LegacyPage from "@/components/LegacyPage";
-import { createPageMetadata } from "@/lib/metadata";
+import { ContactPageContent } from "@/components/roadside/site";
+import { createPageMetadata, getPublicRoute } from "@/lib/metadata";
 
-export const metadata = createPageMetadata({
-  path: "/contact",
-  title: "Contact Us - Car Service & Repair HTML5 Template",
-});
-
+export const metadata = createPageMetadata(getPublicRoute("/contact"));
 
 export default function Page() {
-  return <LegacyPage page="contact" />;
+  return <ContactPageContent />;
 }

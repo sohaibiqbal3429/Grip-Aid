@@ -1,13 +1,853 @@
-/*
- * App-level globals for the Next.js migration.
- * Do not rename legacy selectors such as te-main-menu, te-theme-btn,
- * te-comment-form, page-breadcrumb-area, or section classes during the
- * initial conversion; the vendor/theme bundle preserves those class names.
- */
+:root {
+  --gripaid-bg: #f5f7fb;
+  --gripaid-surface: #ffffff;
+  --gripaid-surface-alt: #eef2f7;
+  --gripaid-ink: #142033;
+  --gripaid-muted: #596579;
+  --gripaid-line: #d8e0eb;
+  --gripaid-brand: #f24c1a;
+  --gripaid-brand-dark: #c9390f;
+  --gripaid-brand-soft: #fff2ed;
+  --gripaid-dark: #081120;
+  --gripaid-dark-soft: #15233a;
+  --gripaid-shadow: 0 24px 60px rgba(10, 20, 38, 0.08);
+  --gripaid-radius: 24px;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  background:
+    radial-gradient(circle at top right, rgba(242, 76, 26, 0.12), transparent 24%),
+    linear-gradient(180deg, #f8fafc 0%, #eef3f8 100%);
+  color: var(--gripaid-ink);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+main {
+  overflow: hidden;
+}
+
+.gripaid-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(248, 250, 252, 0.94);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(216, 224, 235, 0.7);
+}
+
+.gripaid-topbar {
+  background: var(--gripaid-dark);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.92rem;
+}
+
+.gripaid-topbar__inner,
+.gripaid-topbar__items,
+.gripaid-navbar__inner,
+.gripaid-navbar__actions,
+.gripaid-actions,
+.gripaid-footer__social,
+.gripaid-footer__bottom,
+.gripaid-footer__bottom-links,
+.gripaid-newsletter__form,
+.gripaid-contact-panel__item {
+  display: flex;
+  align-items: center;
+}
+
+.gripaid-topbar__inner {
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.8rem 0;
+}
+
+.gripaid-topbar__items {
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+}
+
+.gripaid-topbar__items a,
+.gripaid-topbar__items span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.gripaid-navbar {
+  display: block;
+}
+
+.gripaid-navbar__inner {
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.gripaid-logo img {
+  height: 48px;
+  width: auto;
+}
+
+.gripaid-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-weight: 600;
+}
+
+.gripaid-nav a {
+  position: relative;
+  padding: 0.35rem 0;
+}
+
+.gripaid-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gripaid-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.gripaid-nav a:hover::after,
+.gripaid-nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.gripaid-navbar__actions,
+.gripaid-actions {
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.gripaid-link-btn {
+  color: var(--gripaid-brand);
+  font-weight: 700;
+}
+
+.gripaid-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  min-height: 52px;
+  padding: 0.9rem 1.5rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.gripaid-btn:hover,
+.gripaid-btn:focus-visible {
+  transform: translateY(-1px);
+}
+
+.gripaid-btn--solid {
+  background: var(--gripaid-brand);
+  box-shadow: 0 14px 30px rgba(242, 76, 26, 0.28);
+  color: #ffffff;
+}
+
+.gripaid-btn--solid:hover,
+.gripaid-btn--solid:focus-visible {
+  background: var(--gripaid-brand-dark);
+  color: #ffffff;
+}
+
+.gripaid-btn--outline {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.gripaid-btn--outline-dark {
+  border-color: var(--gripaid-line);
+  color: var(--gripaid-ink);
+}
+
+.gripaid-btn--dark {
+  background: var(--gripaid-dark);
+  color: #ffffff;
+}
+
+.gripaid-mobile-nav {
+  display: none;
+  padding-bottom: 1rem;
+}
+
+.gripaid-hero,
+.gripaid-page-banner {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.gripaid-hero {
+  padding: 7rem 0 6rem;
+}
+
+.gripaid-page-banner {
+  padding: 5rem 0;
+}
+
+.gripaid-hero__overlay,
+.gripaid-page-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(8, 17, 32, 0.9), rgba(8, 17, 32, 0.6));
+}
+
+.gripaid-hero .container,
+.gripaid-page-banner .container {
+  position: relative;
+  z-index: 1;
+}
+
+.gripaid-hero__content,
+.gripaid-page-banner__content {
+  color: #ffffff;
+}
+
+.gripaid-hero__content h1,
+.gripaid-page-banner__content h1,
+.gripaid-section-heading h2,
+.gripaid-emergency-cta h2,
+.gripaid-form-card__header h2,
+.gripaid-not-found h2 {
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.gripaid-hero__content h1 {
+  max-width: 11ch;
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  margin: 0.8rem 0 1rem;
+}
+
+.gripaid-page-banner__content {
+  max-width: 760px;
+}
+
+.gripaid-page-banner__content h1 {
+  font-size: clamp(2.2rem, 4.2vw, 4rem);
+  margin: 0.7rem 0 1rem;
+}
+
+.gripaid-hero__content p,
+.gripaid-page-banner__content p,
+.gripaid-section-heading p,
+.gripaid-card p,
+.gripaid-contact-panel span,
+.gripaid-contact-panel a,
+.gripaid-article__content p,
+.gripaid-newsletter__inner p,
+.gripaid-footer p,
+.gripaid-footer li,
+.gripaid-not-found p {
+  color: var(--gripaid-muted);
+  line-height: 1.8;
+}
+
+.gripaid-hero__content p,
+.gripaid-page-banner__content p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.08rem;
+  max-width: 62ch;
+}
+
+.gripaid-eyebrow,
+.gripaid-search__type {
+  display: inline-block;
+  color: var(--gripaid-brand);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.gripaid-section {
+  padding: 5.5rem 0;
+}
+
+.gripaid-section--alt {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(238, 242, 247, 0.9));
+}
+
+.gripaid-section--dark {
+  background: linear-gradient(135deg, var(--gripaid-dark), var(--gripaid-dark-soft));
+}
+
+.gripaid-section--dark .gripaid-section-heading h2,
+.gripaid-section--dark .gripaid-section-heading p,
+.gripaid-section--dark .gripaid-process-card h3,
+.gripaid-section--dark .gripaid-process-card p {
+  color: #ffffff;
+}
+
+.gripaid-section-heading {
+  max-width: 720px;
+  margin-bottom: 2.5rem;
+}
+
+.gripaid-section-heading.is-center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.gripaid-section-heading h2 {
+  margin: 0.7rem 0 1rem;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+}
+
+.gripaid-section-heading p {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.gripaid-card,
+.gripaid-emergency-cta,
+.gripaid-newsletter__inner,
+.gripaid-form-card,
+.gripaid-not-found,
+.gripaid-stat-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(216, 224, 235, 0.88);
+  border-radius: var(--gripaid-radius);
+  box-shadow: var(--gripaid-shadow);
+}
+
+.gripaid-card {
+  height: 100%;
+  overflow: hidden;
+}
+
+.gripaid-service-card img,
+.gripaid-coverage-card img,
+.gripaid-blog-card img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+}
+
+.gripaid-service-card__body,
+.gripaid-coverage-card__body,
+.gripaid-blog-card__body,
+.gripaid-feature-card,
+.gripaid-faq-card,
+.gripaid-team-card,
+.gripaid-testimonial-card {
+  padding: 1.75rem;
+}
+
+.gripaid-card h3,
+.gripaid-article__content h2,
+.gripaid-form-card__header h2,
+.gripaid-not-found h2 {
+  color: var(--gripaid-ink);
+}
+
+.gripaid-card h3 {
+  font-size: 1.35rem;
+  margin: 1rem 0 0.7rem;
+}
+
+.gripaid-card a {
+  color: var(--gripaid-brand);
+  font-weight: 700;
+}
+
+.gripaid-icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: var(--gripaid-brand-soft);
+  color: var(--gripaid-brand);
+  font-size: 1.3rem;
+}
+
+.gripaid-hero__stats {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gripaid-stat-card {
+  padding: 1.4rem;
+}
+
+.gripaid-stat-card strong {
+  display: block;
+  color: var(--gripaid-dark);
+  font-size: 1.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.gripaid-stat-card span,
+.gripaid-hero__badges span,
+.gripaid-blog-card__meta span,
+.gripaid-testimonial-card span {
+  color: var(--gripaid-muted);
+}
+
+.gripaid-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.3rem;
+}
+
+.gripaid-hero__badges span {
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.gripaid-image-stack img,
+.gripaid-rounded-image {
+  width: 100%;
+  border-radius: var(--gripaid-radius);
+  box-shadow: var(--gripaid-shadow);
+}
+
+.gripaid-check-list,
+.gripaid-detail-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gripaid-check-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.gripaid-check-list__item i {
+  color: var(--gripaid-brand);
+  margin-top: 0.2rem;
+}
+
+.gripaid-process-card {
+  height: 100%;
+  padding: 1.8rem;
+  border-radius: var(--gripaid-radius);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gripaid-process-card__number {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.gripaid-testimonial-card strong {
+  display: block;
+  margin-top: 1rem;
+}
+
+.gripaid-emergency-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, #ffffff, #fff3ed);
+}
+
+.gripaid-emergency-cta p {
+  margin: 0.8rem 0 0;
+}
+
+.gripaid-blog-card__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.92rem;
+}
+
+.gripaid-contact-panel {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.gripaid-contact-panel__item {
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.2rem 1.3rem;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--gripaid-line);
+  border-radius: 20px;
+}
+
+.gripaid-contact-panel__item i {
+  color: var(--gripaid-brand);
+  font-size: 1.1rem;
+  margin-top: 0.2rem;
+}
+
+.gripaid-contact-panel__item strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.gripaid-contact-panel__item ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--gripaid-muted);
+}
+
+.gripaid-form-card {
+  padding: 2rem;
+}
+
+.gripaid-form-card__header {
+  margin-bottom: 1.5rem;
+}
+
+.gripaid-form-card__header h2 {
+  margin: 0.6rem 0 0.8rem;
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+}
+
+.te-comment-form input,
+.te-comment-form textarea,
+.gripaid-search__form input,
+.gripaid-newsletter__form input {
+  width: 100%;
+  border: 1px solid var(--gripaid-line);
+  border-radius: 18px;
+  background: #ffffff;
+  color: var(--gripaid-ink);
+  min-height: 58px;
+  padding: 0.95rem 1rem;
+}
+
+.te-comment-form textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.te-comment-form .col-xl-12,
+.te-comment-form .col-12,
+.te-comment-form .col-xl-6 {
+  margin-bottom: 1rem;
+}
+
+.te-comment-form button {
+  border: 0;
+}
+
+.gripaid-newsletter {
+  padding: 0 0 5.5rem;
+}
+
+.gripaid-newsletter__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.25rem 2.5rem;
+  background: linear-gradient(135deg, var(--gripaid-dark), #21334f);
+}
+
+.gripaid-newsletter__inner h2,
+.gripaid-newsletter__inner p {
+  color: #ffffff;
+}
+
+.gripaid-newsletter__inner h2 {
+  margin: 0.7rem 0;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.gripaid-newsletter__form {
+  gap: 0.9rem;
+  min-width: min(100%, 520px);
+}
+
+.gripaid-newsletter__form input {
+  min-width: 280px;
+}
+
+.gripaid-footer {
+  padding: 0 0 3rem;
+}
+
+.gripaid-footer__card {
+  height: 100%;
+  padding: 2rem;
+  background: rgba(8, 17, 32, 0.96);
+  border-radius: var(--gripaid-radius);
+  color: #ffffff;
+}
+
+.gripaid-footer__card p,
+.gripaid-footer__card li,
+.gripaid-footer__card span,
+.gripaid-footer__card a {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.gripaid-footer__card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.gripaid-footer__list,
+.gripaid-footer__contact {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.gripaid-footer__contact li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.gripaid-footer__social {
+  gap: 0.85rem;
+  margin-top: 1.2rem;
+}
+
+.gripaid-footer__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.gripaid-footer__bottom {
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+}
+
+.gripaid-footer__bottom p {
+  margin: 0;
+}
+
+.gripaid-footer__bottom-links {
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gripaid-article {
+  display: grid;
+  gap: 2rem;
+}
+
+.gripaid-article__content h2 {
+  font-size: 1.55rem;
+  margin: 1.5rem 0 0.6rem;
+}
+
+.gripaid-not-found {
+  padding: 3rem;
+  text-align: center;
+}
+
+.gripaid-not-found strong {
+  display: block;
+  color: var(--gripaid-brand);
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+}
+
+.gripaid-not-found h2 {
+  margin: 1rem 0 0.8rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.gripaid-search {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.gripaid-search__form {
+  display: flex;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.gripaid-search h2 {
+  margin-bottom: 1.2rem;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--gripaid-brand);
+  color: #ffffff;
+  font-weight: 700;
+  min-width: 58px;
+  min-height: 58px;
+  box-shadow: 0 18px 34px rgba(242, 76, 26, 0.32);
+  z-index: 30;
+}
+
+.mobile-nav__bar,
+.mobile-nav__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mobile-nav__toggle,
+.mobile-nav__submenu-toggle {
+  border: 0;
+  background: transparent;
+  color: var(--gripaid-ink);
+  font-weight: 700;
+}
+
+.mobile-nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  background: var(--gripaid-surface);
+  border: 1px solid var(--gripaid-line);
+}
+
+.mobile-nav__toggle-icon {
+  letter-spacing: -0.1em;
+}
+
+.mobile-nav__panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid var(--gripaid-line);
+  box-shadow: var(--gripaid-shadow);
+}
+
+.mobile-nav__list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.mobile-nav__item + .mobile-nav__item {
+  border-top: 1px solid var(--gripaid-line);
+}
+
+.mobile-nav__row {
+  padding: 0.85rem 0;
+}
+
+.mobile-nav__link {
+  font-weight: 700;
+}
+
+@media (max-width: 991.98px) {
+  .gripaid-header {
+    position: static;
+  }
+
+  .gripaid-navbar {
+    display: none;
+  }
+
+  .gripaid-mobile-nav {
+    display: block;
+  }
+
+  .gripaid-topbar__inner,
+  .gripaid-emergency-cta,
+  .gripaid-newsletter__inner,
+  .gripaid-search__form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gripaid-hero {
+    padding-top: 5.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .gripaid-topbar {
+    display: none;
+  }
+
+  .gripaid-hero__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .gripaid-section,
+  .gripaid-newsletter {
+    padding: 4rem 0;
+  }
+
+  .gripaid-form-card,
+  .gripaid-emergency-cta,
+  .gripaid-newsletter__inner,
+  .gripaid-footer__card,
+  .gripaid-not-found {
+    padding: 1.5rem;
+  }
+
+  .gripaid-newsletter__form {
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gripaid-newsletter__form input {
+    min-width: 0;
+  }
+
+  .gripaid-search__form {
+    width: 100%;
+  }
+
+  .gripaid-search__form button,
+  .gripaid-search__form input {
+    width: 100%;
+  }
 }

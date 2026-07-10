@@ -131,7 +131,7 @@ export default function ContactFormAlt() {
           <input
             name="subject"
             type="text"
-            placeholder="Subject"
+            placeholder="Service Needed"
             aria-describedby={fieldErrors.subject?.length ? "contact-alt-subject-error" : undefined}
           />
           {renderFieldErrors("subject")}
@@ -141,7 +141,7 @@ export default function ContactFormAlt() {
             name="message"
             cols={20}
             rows={3}
-            placeholder="Write your Message here"
+            placeholder="Tell us your location and what happened"
             aria-describedby={fieldErrors.message?.length ? "contact-alt-message-error" : undefined}
           />
           {renderFieldErrors("message")}
@@ -153,7 +153,7 @@ export default function ContactFormAlt() {
         ) : null}
         <div className="col-12">
           <button className="te-theme-btn style-2" type="submit" disabled={submitState === "submitting"}>
-            {submitState === "submitting" ? "SENDING..." : "SEND NOW"}
+            {submitState === "submitting" ? "SENDING..." : "REQUEST HELP"}
           </button>
         </div>
       </div>

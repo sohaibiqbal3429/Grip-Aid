@@ -1,5 +1,5 @@
-import LegacyPage from "@/components/LegacyPage";
+import { NotFoundPageContent } from "@/components/roadside/site";
 
-export default function Page() {
-  return <LegacyPage page="notFound" />;
+export default function NotFound() {
+  return <NotFoundPageContent />;
 }

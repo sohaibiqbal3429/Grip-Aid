@@ -1,28 +1,16 @@
 import type { Metadata } from "next";
 
-export const siteName = "Automec";
-export const siteDescription = "Automec - Car Service & Repair HTML5 Template";
-export const siteKeywords = [
-  "auto care",
-  "auto center",
-  "auto repair",
-  "auto service",
-  "auto shop",
-  "automotive",
-  "car mechanic",
-  "car repair",
-  "car service",
-  "car shop",
-  "garage",
-  "mechanic",
-  "mechanic auto shop",
-  "mechanic workshop",
-];
+import {
+  getRoute,
+  imageLibrary,
+  publicRoutes,
+  siteKeywords,
+  siteName,
+  siteTagline,
+  type PublicRoute,
+} from "@/lib/roadside-content";
 
-export type PublicRoute = {
-  path: string;
-  title: string;
-};
+export { publicRoutes, siteKeywords, siteName };
 
 function normalizeSiteUrl(value?: string): string | null {
   const trimmedValue = value?.trim();
@@ -48,33 +36,29 @@ function resolveSiteUrl(): string {
 }
 
 export const siteUrl = resolveSiteUrl();
-
-export const publicRoutes: PublicRoute[] = [
-  { path: "/", title: "Home - Car Service & Repair HTML5 Template" },
-  { path: "/home-2", title: "Home-2 - Car Service & Repair HTML5 Template" },
-  { path: "/about", title: "About Us - Car Service & Repair HTML5 Template" },
-  { path: "/services", title: "Services - Car Service & Repair HTML5 Template" },
-  { path: "/services/details", title: "Service Details - Car Service & Repair HTML5 Template" },
-  { path: "/projects", title: "Projects - Car Service & Repair HTML5 Template" },
-  { path: "/projects/details", title: "Project Details - Car Service & Repair HTML5 Template" },
-  { path: "/blog", title: "Blog - Car Service & Repair HTML5 Template" },
-  { path: "/blog/details", title: "Blog Details - Car Service & Repair HTML5 Template" },
-  { path: "/team", title: "Team Member - Car Service & Repair HTML5 Template" },
-  { path: "/team/details", title: "Team Details - Car Service & Repair HTML5 Template" },
-  { path: "/contact", title: "Contact Us - Car Service & Repair HTML5 Template" },
-  { path: "/search", title: "Search - Car Service & Repair HTML5 Template" },
-];
+export const siteDescription = siteTagline;
+export const defaultOgImage = imageLibrary.heroPrimary;
 
 export function absoluteUrl(path = "/"): string {
   return new URL(path, siteUrl).toString();
 }
 
-export function createPageMetadata({ path, title }: PublicRoute): Metadata {
-  const url = absoluteUrl(path);
+export function getPublicRoute(path: string): PublicRoute {
+  return (
+    getRoute(path) ?? {
+      path,
+      title: siteName,
+      description: siteDescription,
+    }
+  );
+}
+
+export function createPageMetadata(route: PublicRoute): Metadata {
+  const url = absoluteUrl(route.path);
 
   return {
-    title,
-    description: siteDescription,
+    title: route.title,
+    description: route.description,
     keywords: siteKeywords,
     alternates: {
       canonical: url,
@@ -82,21 +66,21 @@ export function createPageMetadata({ path, title }: PublicRoute): Metadata {
     openGraph: {
       type: "website",
       url,
-      title,
-      description: siteDescription,
+      title: route.title,
+      description: route.description,
       siteName,
       images: [
         {
-          url: absoluteUrl("/images/logo/logo.png"),
-          alt: siteName,
+          url: defaultOgImage,
+          alt: "Roadside assistance vehicle responding to a call",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description: siteDescription,
-      images: [absoluteUrl("/images/logo/logo.png")],
+      title: route.title,
+      description: route.description,
+      images: [defaultOgImage],
     },
   };
 }

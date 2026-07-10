@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import type { ReactNode } from "react";
+import { useState } from "react";
 
 type MobileNavItem = {
   label: string;
@@ -42,7 +43,7 @@ function MobileNavList({ items, onNavigate }: { items: MobileNavItem[]; onNaviga
                   type="button"
                   onClick={() => setOpenItems((current) => ({ ...current, [itemKey]: !isOpen }))}
                 >
-                  {isOpen ? "−" : "+"}
+                  {isOpen ? "-" : "+"}
                 </button>
               ) : null}
             </div>
@@ -68,7 +69,9 @@ export default function MobileNav({ items, logo, menuLabel = "Menu" }: MobileNav
           type="button"
           onClick={() => setIsOpen((current) => !current)}
         >
-          <span className="mobile-nav__toggle-icon" aria-hidden="true">☰</span>
+          <span className="mobile-nav__toggle-icon" aria-hidden="true">
+            |||
+          </span>
           <span>{menuLabel}</span>
         </button>
       </div>
