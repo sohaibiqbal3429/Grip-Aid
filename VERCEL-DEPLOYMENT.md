@@ -32,7 +32,7 @@ SMTP_HOST=smtp.your-provider.com
 SMTP_PORT=587
 SMTP_USER=your-smtp-user
 SMTP_PASS=your-smtp-password
-SMTP_FROM="Automec Website <no-reply@your-domain.com>"
+SMTP_FROM="Automec Platform <no-reply@your-domain.com>"
 ```
 
 Required for the newsletter form:

@@ -334,7 +334,7 @@ export const faqs = [
   {
     question: "Are your services available 24/7?",
     answer:
-      "The website is written and structured for round-the-clock emergency response, which matches the needs of roadside assistance customers.",
+      "The Platform is written and structured for round-the-clock emergency response, which matches the needs of roadside assistance customers.",
   },
   {
     question: "How do I request assistance?",

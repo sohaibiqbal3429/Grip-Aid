@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   keywords: siteKeywords,
   authors: [{ name: siteName }],
   icons: {
-    icon: [{ url: "/gripaid-mark.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/gripaid-mark.svg" }],
+    icon: [{ url: "/gripaid-logo.png", type: "image/png" }],
+    apple: [{ url: "/gripaid-logo.png", type: "image/png" }],
   },
   openGraph: {
     type: "website",

@@ -65,7 +65,7 @@ async function subscribeEmail(email: string) {
     body: JSON.stringify({
       email,
       listId,
-      source: "website-newsletter",
+      source: "Platform-newsletter",
     }),
   });
 

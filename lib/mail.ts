@@ -59,7 +59,7 @@ export async function sendContactMail({
   });
 
   const mailSubject = subject || "New contact form submission";
-  const senderName = name || "Website visitor";
+  const senderName = name || "Platform visitor";
 
   await transporter.sendMail({
     from: getRequiredEnv("SMTP_FROM"),

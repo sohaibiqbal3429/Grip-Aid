@@ -33,7 +33,7 @@ import {
 function Logo() {
   return (
     <Link className="gripaid-logo" href="/">
-      <img src="/gripaid-logo.svg" alt={siteName} />
+      <img src="/gripaid-logo.png" alt={siteName} />
     </Link>
   );
 }
@@ -289,7 +289,7 @@ export function ServicesGrid({ introOnly }: { introOnly?: boolean }) {
         <SectionHeading
           eyebrow="Our Services"
           title="Professional roadside help delivered where the driver is stranded"
-          copy="Every service on this website reinforces the same message: we dispatch help directly to the customer instead of asking the customer to reach a shop."
+          copy="Every service on this Platform reinforces the same message: we dispatch help directly to the customer instead of asking the customer to reach a shop."
           center
         />
         <div className="row g-4">
@@ -366,7 +366,7 @@ export function TrustGrid() {
       <div className="container">
         <SectionHeading
           eyebrow="Why Choose Us"
-          title="A roadside assistance website should feel urgent, clear, and trustworthy"
+          title="A roadside assistance Platform should feel urgent, clear, and trustworthy"
           copy="These service principles help visitors understand the difference between a mobile response company and a garage-based business."
           center
         />
@@ -449,7 +449,7 @@ export function CoverageSection() {
       <div className="container">
         <SectionHeading
           eyebrow="Coverage And Callouts"
-          title="The roadside situations this website now speaks to directly"
+          title="The roadside situations this Platform now speaks to directly"
           copy="Each scenario is supported by real roadside-assistance imagery and copy that fits the business model of mobile emergency support."
           center
         />
@@ -915,7 +915,7 @@ export function BlogDetailsPageContent() {
               </p>
               <h2>3. Stay calm while help comes to you</h2>
               <p>
-                This is the core difference the website now communicates. You do not need to find a
+                This is the core difference the Platform now communicates. You do not need to find a
                 garage first. The right next step is to request mobile support and wait for the
                 technician to arrive.
               </p>

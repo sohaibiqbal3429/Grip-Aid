@@ -1,13 +1,13 @@
-# GripAid Roadside Assistance - Website Redesign Design Specification
+# GripAid Roadside Assistance - Platform Redesign Design Specification
 
 ## Design Role
 Act as a senior UI/UX designer with 20+ years experience designing premium automotive, emergency response, and service platforms.
 
-Redesign GripAid Roadside Assistance into a premium, trustworthy, conversion-focused emergency assistance website.
+Redesign GripAid Roadside Assistance into a premium, trustworthy, conversion-focused emergency assistance Platform.
 
 The feeling should match brands like AAA, Tesla Roadside Assistance, Mercedes-Benz roadside support, and premium automotive concierge services.
 
-The website must instantly communicate:
+The Platform must instantly communicate:
 - Fast emergency response
 - Trust
 - Professional technicians
@@ -77,7 +77,7 @@ Requirements:
 - Minimal
 - Memorable
 - Professional
-- Works on vehicles, uniforms, website, mobile app
+- Works on vehicles, uniforms, Platform, mobile app
 
 Concept direction:
 - Vehicle + grip/tire symbol
@@ -95,7 +95,7 @@ Modern automotive style sans-serif.
 
 ---
 
-# Website Layout
+# Platform Layout
 
 ## Header
 
@@ -333,7 +333,7 @@ Animations:
 
 # Final Design Goal
 
-The website should feel like:
+The Platform should feel like:
 
 "A driver is stranded on a highway at midnight. They open GripAid and immediately trust that help is coming."
 

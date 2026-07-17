@@ -1,0 +1,23 @@
+
+> grip-aid-next@0.1.0 predev
+> npm run clean:dev
+
+
+> grip-aid-next@0.1.0 clean:dev
+> node scripts/clean-next.js .next-dev
+
+Removed E:\Grip-Aid\.next-dev
+
+> grip-aid-next@0.1.0 dev
+> next dev --port 3011
+
+   ▲ Next.js 15.5.20
+   - Local:        http://localhost:3011
+   - Network:      http://192.168.0.116:3011
+
+ ✓ Starting...
+ ✓ Ready in 3.3s
+ ○ Compiling / ...
+ ✓ Compiled / in 7.9s (622 modules)
+ GET / 200 in 8921ms
+[?25h
