@@ -35,12 +35,16 @@ function formatFieldErrors(fieldErrors: ContactFieldErrors = {}) {
 function getContactRequestBody(form: HTMLFormElement): ContactApiRequestBody {
   const formData = new FormData(form);
 
+  const location = String(formData.get("location") || "");
+  const vehicleIssue = String(formData.get("vehicle_issue") || "");
+  const message = String(formData.get("message") || "");
+
   return {
     name: String(formData.get("name") || ""),
     email: String(formData.get("email") || ""),
     phone: String(formData.get("phone") || ""),
-    subject: String(formData.get("subject") || ""),
-    message: String(formData.get("message") || ""),
+    subject: vehicleIssue || "Roadside assistance request",
+    message: [`Location: ${location}`, `Vehicle Issue: ${vehicleIssue}`, message].filter(Boolean).join("\n\n"),
   };
 }
 
@@ -129,9 +133,17 @@ export default function ContactFormAlt() {
         </div>
         <div className="col-xl-6">
           <input
-            name="subject"
+            name="location"
             type="text"
-            placeholder="Service Needed"
+            placeholder="Current Location"
+            autoComplete="street-address"
+          />
+        </div>
+        <div className="col-xl-12">
+          <input
+            name="vehicle_issue"
+            type="text"
+            placeholder="Vehicle Issue"
             aria-describedby={fieldErrors.subject?.length ? "contact-alt-subject-error" : undefined}
           />
           {renderFieldErrors("subject")}
@@ -141,7 +153,7 @@ export default function ContactFormAlt() {
             name="message"
             cols={20}
             rows={3}
-            placeholder="Tell us your location and what happened"
+            placeholder="Message"
             aria-describedby={fieldErrors.message?.length ? "contact-alt-message-error" : undefined}
           />
           {renderFieldErrors("message")}
